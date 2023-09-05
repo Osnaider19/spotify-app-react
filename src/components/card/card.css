@@ -1,0 +1,4 @@
+.content-card:hover  button{
+  bottom: 0.5rem;
+  opacity: 1;
+}

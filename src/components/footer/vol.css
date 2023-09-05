@@ -1,0 +1,13 @@
+.range-vol{
+    height: 0.25rem;
+    width: 100%;
+}
+.range-vol:hover{
+    background-color: green;
+}
+.range-vol::-webkit-slider-thumb{
+ width: 0;
+}
+.range-vol::-moz-range-thumb {
+    width: 0; 
+}
