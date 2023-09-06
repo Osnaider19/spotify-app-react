@@ -22,7 +22,7 @@ export const YourLibrary = () => {
         </div>
       </div>
       <div className="mt-5">
-        <button className="py-1 px-3 bg-[rgba(255,255,255,0.2)] rounded-2xl hover:bg-[rgba(255,255,255,0.1)] transition-colors duration-200">
+        <button className="py-1 px-3 bg-[#2A2A2A] rounded-2xl hover:bg-[rgba(255,255,255,0.2)] transition-colors duration-200">
           Playlists
         </button>
       </div>
