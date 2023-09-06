@@ -11,7 +11,7 @@ export const Tracks = () => {
       {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${responseToken.access_token}`,
+          Authorization: `Bearer ${responseToken?.access_token}`,
         },
       }
     );
@@ -22,7 +22,7 @@ export const Tracks = () => {
 
   useEffect(() => {
     getTracks();
-  }, [responseToken.access_token]);
+  }, [responseToken?.access_token]);
 
   return (
     <div>

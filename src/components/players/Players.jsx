@@ -7,22 +7,20 @@ export const Players = () => {
   const [data, setData] = useState(null);
   const getTracks = async () => {
     const tracks = await fetch(
-      "https://api.spotify.com/v1/episodes",
+      "https://api.spotify.com/v1/me/following?type=artist",
       {
         method: "GET",
         headers: {  
-          Authorization: `Bearer ${responseToken.access_token}`,
+          Authorization: `Bearer ${responseToken?.access_token}`,
         },
       }
     );
-    console.log(tracks);
-
     if (!tracks.ok) {
         throw new Error("La solicitud a la API de Spotify no fue exitosa. error " + tracks.status , tracks.statusText );
     }
-    console.log(data);
     const data = await tracks.json();
     setData(data);
+    console.log(data);
   };
 
   useEffect(() => {

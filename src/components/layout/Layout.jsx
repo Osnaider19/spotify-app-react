@@ -14,8 +14,8 @@ export function Layout({ children }) {
             </div>
           </main>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 }

@@ -1,7 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdOutlineDownloadForOffline } from "react-icons/md";
+import { useDispatch } from "react-redux";
 import { BiUser } from "react-icons/bi";
+import { setSession } from "../../redux/facture/auth/authSlice";
 export const HeaderNav = () => {
+  const dispatch = useDispatch();
+  const navegation = useNavigate();
+  const handelSesion = () => {
+    dispatch(setSession());
+    navegation("/login");
+  }
   return (
     <div>
       <div className="flex justify-center items-center gap-x-3">
@@ -19,7 +27,10 @@ export const HeaderNav = () => {
           </div>
         </Link>
         <div className="h-[35px] w-[35px] bg-[rgba(0,0,0,0.4)] rounded-full mr-2">
-          <button className="flex justify-center items-center w-full h-full">
+          <button
+            className="flex justify-center items-center w-full h-full"
+            onClick={handelSesion}
+          >
             <i className="text-2xl">
               <BiUser />
             </i>

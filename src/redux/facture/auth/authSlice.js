@@ -28,12 +28,20 @@ export const authUser = createSlice({
     setRefreshToken: (state, action) => {
       state.refresh_token = action.payload;
     },
+    setSession: (state, action) => {
+      localStorage.removeItem("redux__state");
+      Object.assign(state, default_initialState);
+    },
   },
 });
 
 export default authUser.reducer;
-export const { setIsAuthenticated, setRefreshToken, setResponseToken } =
-  authUser.actions;
+export const {
+  setIsAuthenticated,
+  setRefreshToken,
+  setResponseToken,
+  setSession,
+} = authUser.actions;
 
 // import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
