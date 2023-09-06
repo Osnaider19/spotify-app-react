@@ -10,6 +10,7 @@ export const Card = ({ image, title, description }) => {
             <img
               src={image}
               alt={title}
+              loading="lazy"
               className="w-full h-full object-cover"
             />
             <button className="absolute right-3 opacity-0 w-[45px] h-[45px] bg-green-500 rounded-full -bottom-16 z-10 transition-all duration-200">

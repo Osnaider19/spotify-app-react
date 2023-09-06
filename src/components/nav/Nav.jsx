@@ -3,7 +3,7 @@ import { BsSearch } from "react-icons/bs";
 import {AiFillHome} from 'react-icons/ai'
 import { YourLibrary } from "./YourLibrary";
 import { PlayLists } from "./PlayLists";
-
+import { ItemPlayList } from "./ItemPlayList";
 
 export  const Nav = () => {
   return (
@@ -18,7 +18,7 @@ export  const Nav = () => {
         <div className="w-full rounded-xl h-screen bg-[#121212]">
             <YourLibrary/>
             <PlayLists/>
-            {/*<ItemPlayList/>*/}
+            <ItemPlayList/>
         </div>
       </div>
     </nav>
