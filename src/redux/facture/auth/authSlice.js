@@ -9,7 +9,6 @@ const default_initialState = {
 const initialState = (() => {
   const persistanceState = localStorage.getItem("redux__state");
   if (persistanceState) {
-    console.log(JSON.parse(persistanceState).authUser);
     return JSON.parse(persistanceState).authUser;
   } else {
     return default_initialState;

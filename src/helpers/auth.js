@@ -14,7 +14,6 @@ export const SpotfifyAuth = async (requeredParams) => {
   try {
     const params = {
       ...requeredParams,
-      grant_type: "authorization_code", 
       ...commonParams,
     };
     const searchParams = Object.keys(params).map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(params[key])).join("&")
