@@ -1,12 +1,10 @@
 import { useSelector } from "react-redux";
-
-export  function Login() {
+import { CLIENT_ID, REDIRECT_URI } from "../config/config";
+export function Login() {
   const handleLogin = () => {
-    const url_redirect = "http://localhost:5173/";
     const scope = "user-read-private user-read-email";
-    const CLIENTID = "db421431148949248690db175ed97034";
     const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-    const spotifyUrl = `${AUTH_ENDPOINT}?client_id=${CLIENTID}&response_type=code&redirect_uri=${url_redirect}&scope=${scope}`;
+    const spotifyUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&scope=${scope}`;
     location.replace(spotifyUrl);
   };
   const state = useSelector((state) => state.authUser);

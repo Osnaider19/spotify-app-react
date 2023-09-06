@@ -1,13 +1,10 @@
 import { apiCall } from "./apiCall";
-
-const CLIENTID = "db421431148949248690db175ed97034";
-const CLIENTSECRET = "f1240057560341979e607a4d3522f1c0";
-const REDIRECT_URI = "http://localhost:5173/";
+import { CLIENT_SECRET , CLIENT_ID , REDIRECT_URI } from "../config/config";
 
 const commonParams = {
   redirect_uri: REDIRECT_URI,
-  client_id: CLIENTID,
-  client_secret: CLIENTSECRET,
+  client_id: CLIENT_ID,
+  client_secret: CLIENT_SECRET,
 };
 
 export const SpotfifyAuth = async (requeredParams) => {
