@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { FaPlay } from "react-icons/fa";
 import "./card.css";
-export const Card = ({ image, title, description }) => {
+export const Card = ({ image, title, description  , mediaType , id }) => {
   return (
     <>
-      <Link to="/" className="max-w-[180px]">
+      <Link to={`/${mediaType}/${id}`} className="max-w-[180px]">
         <div className="w-full bg-[#151515] hover:bg-[rgba(255,255,255,0.1)] rounded-md overflow-hidden p-4 transition-colors duration-200 content-card">
-          <div className="relative w-[150px] h-[150px] bg-red-500 rounded-md overflow-hidden">
+          <div className="relative w-[150px] h-[150px] bg-[rgba(255,255,255,0.1)] rounded-md overflow-hidden">
             <img
               src={image}
               alt={title}
@@ -19,7 +19,7 @@ export const Card = ({ image, title, description }) => {
               </i>
             </button>
           </div>
-          <strong className="text-sm line-clamp-1">{title}</strong>
+          <strong className="text-sm line-clamp-1 pt-2">{title}</strong>
           <p className="capitalize text-xs line-clamp-2">{description}</p>
         </div>
       </Link>
