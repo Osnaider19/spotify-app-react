@@ -1,6 +1,7 @@
 import { Header } from "../header/Header";
 import { Nav } from "../nav/Nav";
 import { Footer } from "../footer/Footer";
+import './layout.css'
 export function Layout({ children }) {
   return (
     <>
@@ -9,7 +10,7 @@ export function Layout({ children }) {
         <div className="relative w-full h-full mx-2 rounded-lg overflow-hidden overflow-y-auto">
           <Header />
           <main className="relative h-[86vh]  overflow-hidden overflow-y-auto rounded-lg bg-[#121212]">
-            <div className="relative h-full w-full overflow-hidden overflow-y-auto rounded-lg">
+            <div className="relative h-full w-full overflow-hidden overflow-y-auto rounded-lg layout">
               {children}
             </div>
           </main>
