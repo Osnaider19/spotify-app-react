@@ -1,25 +1,12 @@
-import React, { useState } from "react";
 import { FiMusic } from "react-icons/fi";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
-export const ItemPlayList = () => {
-  const { responseToken } = useSelector((state) => state.authUser);
-  const [data, setData] = useState(null);
-  const getTracks = async () => {
-    const tracks = await fetch("https://api.spotify.com/v1/me/playlists", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${responseToken?.access_token}`,
-      },
-    });
-    const data = await tracks.json();
-    setData(data);
-    console.log(data);
-  };
+import { useGetPlayListsUserQuery } from "../../redux/facture/stateHome/playLists";
 
-  useEffect(() => {
-    getTracks();
-  }, [responseToken?.access_token]);
+export const ItemPlayList = () => {
+
+  const { responseToken } = useSelector((state) => state.authUser);
+  const { data } = useGetPlayListsUserQuery(responseToken.access_token);
+  
   return (
     <div className="px-4 mt-3">
       {data?.items?.map((lists) => (

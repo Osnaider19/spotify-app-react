@@ -16,8 +16,8 @@ export function Home() {
           refresh_token: refresh_token,
         });
       }
-      if (!res.ok) {
-        console.log(res);
+      if (!res.access_token) {
+        throw new Error("error access token es null");
       }
       dispatch(setResponseToken(res));
     } catch (error) {
