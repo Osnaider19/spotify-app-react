@@ -1,17 +1,29 @@
 
-
+.layout:hover{
+ overflow-y: auto;
+}
+.layout{
+    background-color: #121212;
+}
 .layout::-webkit-scrollbar{
-    background-color: transparent;
     width: 13px;
+    background-color: transparent;
+    display: none;
 }
 .layout::-webkit-scrollbar-thumb{
+    display: none;
     background-color: transparent;
     width: 8px;
     transition: all 1s ease-out;
+    overflow: hidden;
 }
 .layout:hover::-webkit-scrollbar-thumb{
-    background-color: #91999F70;
+    background-color: rgba(255, 255, 255, .3);
     width: 8px;
     transition: all 1s ease-out;
-
+    overflow-y: auto;
 }
+.layout:hover:-webkit-scrollbar{
+    background-color: transparent;
+}
+
