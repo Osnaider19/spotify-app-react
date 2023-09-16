@@ -4,31 +4,26 @@ import { useFetch } from "../../hooks/useFetch";
 import { NavPlay } from "./NavPlay";
 import { Songs } from "./Songs";
 import { TbPointFilled } from "react-icons/tb";
+import { transformLikes } from "../../helpers/transform";
+
 export const PlayList = () => {
   const { responseToken } = useSelector((state) => state.authUser);
   const { id } = useParams();
   const url = `https://api.spotify.com/v1/playlists/${id}`;
-  const { data } = useFetch(url, responseToken.access_token);
+  const { data } = useFetch(url, responseToken?.access_token);
   console.log(data);
-  // const [data ,setData] = useState(null);
-  //   const { id } = useParams();
-  //   const getPlayList = async () => {
-  //     const res = await fetch(`https://api.spotify.com/v1/playlists/${id}`,{
-  //       headers: {
-  //         Authorization: `Bearer ${responseToken.access_token}`,
-  //       },
-  //     })
-  //     const json = await res.json();
-  //     setData(json);
-  //     console.log(data);
-  //   }
 
-  //   useEffect(()=>{
-  //     getPlayList()
-  //   }, [id])
-  function formatearNumeroConComas(numero) {
-    return numero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
+  const select = {
+    imagen: data?.images[0]?.url,
+    type: data?.type,
+    name: data?.name,
+    description: data?.description,
+    linkUser: data?.owner?.href,
+    nameUser: data?.owner?.display_name,
+    like: data?.followers?.total,
+    tracks: data?.tracks?.items,
+  };
+
   return (
     <div className="relative min-w-full w-full h-full font-lato">
       <div
@@ -37,28 +32,44 @@ export const PlayList = () => {
       <div className="relative flex z-10 pt-[85px] px-6 w-full">
         <div className="max-h-[240px] max-w-[240px] w-full h-full overflow-hidden shadow-2xl">
           <div className="w-full h-full">
-            <img src={data?.images[0]?.url} alt="" className="w-full h-full" />
+            <img
+              src={select.imagen}
+              id="bg_playlist"
+              alt=""
+              className="w-full h-full imagen"
+            />
           </div>
         </div>
         <div className="w-full min-h-full">
           <div className="flex flex-col min-h-full justify-end items-start px-4">
             <div className="w-full">
-              <p className="capitalize ">{data?.type}</p>
-              <p className="font-lato font-black py-1 text-5xl  w-full">{data?.name}</p>
-              <span className="py-2 block text-[#AAA8A9] font-semibold text-sm">{data?.description}</span>
+              <p className="capitalize ">{select.type}</p>
+              <p className="font-lato font-black py-1 text-5xl  w-full">
+                {select.name}
+              </p>
+              <span className="py-2 block text-[#AAA8A9] font-semibold text-sm">
+                {select.description}
+              </span>
               <div className="py-1">
-                <Link to={data?.owner?.href}>
-                  
+                <Link to={select.linkUser}>
                   <strong className="hover:underline px-1 text-sm">
-                    {data?.owner?.display_name}
+                    {select.nameUser}
                   </strong>
                 </Link>
                 <TbPointFilled className="inline-block text-[9px]" />
+                {select.like > 0 && (
+                  <>
+                    <span className="px-1 text-sm">
+                      {transformLikes(select?.like)}
+                      likes
+                    </span>
+                    <TbPointFilled className="inline-block text-[9px] " />
+                  </>
+                )}
+
                 <span className="px-1 text-sm">
-                  {formatearNumeroConComas(data?.followers?.total ? data?.followers?.total : "" )} likes
+                  {select?.tracks?.length} songs
                 </span>
-                <TbPointFilled className="inline-block text-[9px] " />
-                <span className="px-1 text-sm">{data?.tracks?.items.length} songs</span>
               </div>
             </div>
           </div>
@@ -68,7 +79,7 @@ export const PlayList = () => {
         <div className="absolute left-0 top-0 h-[400px]  w-full bg-gradient-to-t from-transparent via-black/20 to-black/20"></div>
         <div className="relative z-10">
           <NavPlay />
-          <Songs songs={data?.tracks?.items} />
+          <Songs songs={select.tracks} />
         </div>
       </div>
     </div>

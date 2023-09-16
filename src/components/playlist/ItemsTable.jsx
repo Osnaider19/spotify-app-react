@@ -1,7 +1,8 @@
 import React from "react";
 import { TbPointFilled } from "react-icons/tb";
-import { BsHeart } from "react-icons/bs";
+import { BsHeart, BsFillPlayFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import "./table.css";
 import { transformDuration, transformDate } from "../../helpers/transform";
 export const ItemsTable = ({
   num,
@@ -11,14 +12,21 @@ export const ItemsTable = ({
   duration,
   image,
   artists,
-
 }) => {
+  const handelplay = () => {
+    alert("reproduciendo");
+  };
   return (
     <>
-      <tr className="rounded-3xl  hover:bg-[#1A1A1A]  relative ">
-        <td className="px-4 rounded-s-md">{num}</td>
+      <tr className="tr_content">
+        <td className="px-4 rounded-s-md">
+          <button className="button__play" onClick={handelplay}>
+            <span className="num__list">{num}</span>
+            <BsFillPlayFill className="icono_play" />
+          </button>
+        </td>
         <td>
-          <div className="flex  items-center">
+          <div className="flex py-1 items-center">
             <div className="max-w-[40px] max-h-[40px] w-full h-full bg-green-400">
               <img
                 src={image}
@@ -27,7 +35,10 @@ export const ItemsTable = ({
               />
             </div>
             <div className="flex flex-col px-3">
-              <Link to={`/${track.type}/${track.id}`} className=" hover:underline">
+              <Link
+                to={`/${track.type}/${track.id}`}
+                className=" hover:underline"
+              >
                 {track?.name}
               </Link>
               <div className="flex">
@@ -45,22 +56,25 @@ export const ItemsTable = ({
           </div>
         </td>
         <td className="max-w-[200px] min-w-[150px] overflow-ellipsis">
-          <Link to={`/${album?.type}/${album?.id}`} className="line-clamp-1  text-[14px] max-w-[250px] overflow-ellipsis hover:underline text-[#AAA8A9]">
+          <Link
+            to={`/${album?.type}/${album?.id}`}
+            className="line-clamp-1  text-[14px] max-w-[250px] overflow-ellipsis hover:underline text-[#AAA8A9]"
+          >
             {album?.name}
           </Link>
         </td>
         <td>
-          <p className="min-w-[200px] max-w-[200px] text-[#AAA8A9]">{transformDate(date)}</p>
+          <p className="min-w-[200px] max-w-[200px] text-[#AAA8A9]">
+            {transformDate(date)}
+          </p>
         </td>
         <td className="rounded-r-md">
           <div className="flex gap-x-3 justify-center items-center px-2">
-            <button>
-              <i className="text-[#AAA8A9] px-10">
-                <BsHeart />
-              </i>
+            <button className="button_like">
+              <BsHeart className="icon_play" />
             </button>
             <p className="text-[#AAA8A9]">{transformDuration(duration)}</p>
-            <i className="w-full text-[7px] text-center  flex justify-center items-center text-white">
+            <i className="button__details">
               <TbPointFilled />
               <TbPointFilled />
               <TbPointFilled />
