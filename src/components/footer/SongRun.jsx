@@ -5,7 +5,18 @@ import { Link } from "react-router-dom";
 import { toast } from "sonner";
 export const SongRun = () => {
   const { track } = useSelector((state) => state.players);
-  console.log(track);
+  function runtost(){
+    toast.error("info", {
+      description: `la track ${track?.name} no tiene preview`,
+      style: {
+        background: "#121212",
+        color: "#1FDF64",
+        borderColor: "#1FDF64",
+        fontSize: "14px",
+        textTransform: "capitalize",
+      },
+    })
+  }
   return (
     <>
       <div className="flex flex-grow  min-w-[390px]">
@@ -43,17 +54,7 @@ export const SongRun = () => {
           </div>
         </div>
       </div>
-      {track?.preview_url === null &&
-        toast.error("info" , {
-          description: `la track ${track?.name} no tiene preview`,
-          style : {
-            background : "#121212",
-            color : "#1FDF64",
-            borderColor : "#1FDF64",
-            fontSize : "14px",
-            textTransform : "capitalize"
-          },
-        })}
+      {track?.preview_url === null && runtost()}
     </>
   );
 };
