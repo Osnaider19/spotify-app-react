@@ -4,6 +4,8 @@ import { BsHeart, BsFillPlayFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import "./table.css";
 import { transformDuration, transformDate } from "../../helpers/transform";
+import { setTrackPlayer } from "../../redux/facture/players/players";
+import { useDispatch } from "react-redux";
 export const ItemsTable = ({
   num,
   track,
@@ -13,15 +15,16 @@ export const ItemsTable = ({
   image,
   artists,
 }) => {
+  const dispatch = useDispatch();
   const handelplay = () => {
-    alert("reproduciendo");
+    dispatch(setTrackPlayer(track));
   };
   return (
     <>
       <tr className="tr_content">
         <td className="px-4 rounded-s-md">
           <button className="button__play" onClick={handelplay}>
-            <span className="num__list">{num}</span>
+            <span className="num__list">{num + 1}</span>
             <BsFillPlayFill className="icono_play" />
           </button>
         </td>
@@ -41,11 +44,11 @@ export const ItemsTable = ({
               >
                 {track?.name}
               </Link>
-              <div className="flex">
+              <div className="flex w-full max-w-[350px] text-ellipsis line-clamp-1 overflow-hidden justify-start items-center ">
                 {artists?.map((artist) => (
                   <Link
                     to={`/${artist.type}/${artist.id}`}
-                    className="flex text-[14px] line-clamp-1 text-[#AAA8A9] hover:underline mr-1"
+                    className="text-[13px] line-clamp-1 text-[#AAA8A9] hover:underline mr-1"
                     key={artist.id}
                   >
                     {artist.name}

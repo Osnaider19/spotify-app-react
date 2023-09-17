@@ -42,7 +42,6 @@ export const {
   setResponseToken,
   setSession,
 } = authUser.actions;
-
 // import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 // const CLIENTID = process.env.CLIENTID;

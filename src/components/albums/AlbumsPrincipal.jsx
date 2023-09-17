@@ -1,16 +1,15 @@
 import { useSelector } from "react-redux";
 import { Card } from "../card/Card";
-import { useGetPlayListsQuery } from "../../redux/facture/stateHome/playLists";
-import { LoaderCard } from "../loader/LoaderCard";
-export const Players = () => {
+import { useGetAlbumsQuery } from "../../redux/facture/stateHome/albums";
+
+export const AlbumsPrincipal = () => {
   const { responseToken } = useSelector((state) => state.authUser);
-  const { data, isLoading  } = useGetPlayListsQuery(responseToken.access_token);
-  //console.log(error)
+  const {data}  = useGetAlbumsQuery(responseToken?.access_token);
   return (
     <div>
       <div className="flex flex-wrap justify-start gap-4">
-        {isLoading && <LoaderCard />}
-        {data?.playlists?.items?.map((items) => (
+        
+        {data?.albums?.items?.map((items) => (
           <div key={items.id} className="max-w-[180px]">
             <Card
               image={items?.images[0]?.url}

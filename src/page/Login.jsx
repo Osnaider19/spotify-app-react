@@ -66,7 +66,7 @@ export function Login() {
   };
 
   return (
-    <div className="relative h-screen flex flex-col justify-center items-center">
+    <div className="relative h-screen flex flex-col justify-center items-center bg-[#121212]">
       <button
         className="py-2 px-4 rounded-xl bg-green-500 hover:bg-green-600"
         onClick={handleLogin}

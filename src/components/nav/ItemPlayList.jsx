@@ -6,7 +6,6 @@ import { TbPointFilled } from "react-icons/tb";
 export const ItemPlayList = () => {
   const { responseToken } = useSelector((state) => state.authUser);
   const { data } = useGetPlayListsUserQuery(responseToken?.access_token);
-  console.log(data);
   return (
     <div className="px-4 mt-3 ">
       {data?.items?.map((lists) => (
