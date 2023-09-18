@@ -19,7 +19,7 @@ export const SongRun = () => {
   }
   return (
     <>
-      <div className="flex flex-grow  min-w-[390px]">
+      <div className="flex flex-grow  min-w-[470px] ">
         <div className="flex px-2 py-1 gap-x-5 justify-center items-center">
           <div className="h-[55px] w-[55px]  rounded-lg overflow-hidden">
             <img
