@@ -30,7 +30,7 @@ export const PlayList = () => {
     {isPending && <LoaderPlayList/>}
       <div className="relative min-w-full w-full h-full font-lato">
         <div
-          className={`absolute left-0 top-0 w-full h-full bg-gradient-to-t from-transparent via-[#920f0f] to-[#920f0f]`}
+          className={`absolute left-0 top-0 w-full h-full bg-gradient-to-t from-transparent via-[#292331] to-[#3a343670]`}
         ></div>
         <div className="relative flex z-10 pt-[85px] px-6 w-full">
           <div className="max-h-[240px] max-w-[240px] w-full h-full overflow-hidden shadow-2xl">

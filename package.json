@@ -12,6 +12,7 @@
   "dependencies": {
     "@radix-ui/colors": "^3.0.0-rc.4",
     "@radix-ui/react-dropdown-menu": "^2.0.5",
+    "@radix-ui/react-slider": "^1.1.2",
     "@reduxjs/toolkit": "^1.9.5",
     "color-thief-browser": "^2.0.2",
     "react": "^18.2.0",
