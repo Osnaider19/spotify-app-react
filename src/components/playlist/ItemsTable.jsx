@@ -22,7 +22,7 @@ export const ItemsTable = ({
   return (
     <>
       <tr className="tr_content">
-        <td className="px-4 rounded-s-md">
+        <td>
           <button className="button__play" onClick={handelplay}>
             <span className="num__list">{num + 1}</span>
             <BsFillPlayFill className="icono_play" />

@@ -27,7 +27,7 @@ export const PlayList = () => {
 
   return (
     <>
-    {isPending && <LoaderPlayList/>}
+      {isPending && <LoaderPlayList />}
       <div className="relative min-w-full w-full h-full font-lato">
         <div
           className={`absolute left-0 top-0 w-full h-full bg-gradient-to-t from-transparent via-[#292331] to-[#3a343670]`}
@@ -82,7 +82,7 @@ export const PlayList = () => {
           <div className="absolute left-0 top-0 h-[400px]  w-full bg-gradient-to-t from-transparent via-black/20 to-black/20"></div>
           <div className="relative z-10">
             <NavPlay />
-            <Songs songs={select.tracks} />
+            <Songs tracks={select.tracks} />
           </div>
         </div>
       </div>
