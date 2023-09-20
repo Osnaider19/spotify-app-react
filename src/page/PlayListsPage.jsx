@@ -1,8 +1,8 @@
 import React from 'react'
-import { PlayList } from '../components/playlist/PlayList'
+import { PlayListDetails } from '../components/playlist/PlayListDetails'
 
 export const PlayListsPage = () => {
   return (
-    <PlayList/>
+    <PlayListDetails/>
   )
 }

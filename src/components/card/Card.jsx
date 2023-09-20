@@ -20,7 +20,7 @@ export const Card = ({ image, title, description  , mediaType , id }) => {
             </button>
           </div>
           <strong className="text-sm line-clamp-1 pt-2">{title}</strong>
-          <p className="capitalize text-xs line-clamp-2">{description}</p>
+          <p className="capitalize text-xs line-clamp-2 py-1">{description}</p>
         </div>
       </Link>
     </>
