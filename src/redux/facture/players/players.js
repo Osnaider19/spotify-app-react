@@ -1,9 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+const default_initialState = {
   track: null,
   playlists: null,
 };
+
+const initialState = (() => {
+  const persistanceState = localStorage.getItem("redux__state");
+  if (persistanceState) {
+    return JSON.parse(persistanceState).players;
+  } else {
+    return default_initialState;
+  }
+})();
+
 const players = createSlice({
   name: "players",
   initialState,
