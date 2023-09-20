@@ -10,6 +10,7 @@ export const ButtonPlay = ({ audioRef }) => {
     if (audio.paused) {
       audio.play();
       setAudioPaused(false);
+      audio.autoplay = true;
     } else {
       audio.pause();
       setAudioPaused(true);

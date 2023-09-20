@@ -23,7 +23,7 @@ export const SongRun = () => {
         <div className="flex px-2 py-1 gap-x-5 justify-center items-center">
           <div className="h-[55px] w-[55px]  rounded-lg overflow-hidden">
             <img
-              src={track?.album?.images[2].url}
+              src={track?.album?.images[2]?.url ? track?.album?.images[2]?.url : track?.album?.images[0]?.url}
               alt=""
               className="w-full h-full object-cover"
             />

@@ -33,7 +33,6 @@ export const Player = ({ audioRef }) => {
           <ButtonPlay audioRef={audioRef} />
           <audio
             src={track?.preview_url}
-            autoPlay
             ref={audioRef}
             type="audio"
             onTimeUpdate={handleTimeUpdate}
