@@ -10,6 +10,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SpotfifyAuth } from "./helpers/auth";
 import { setResponseToken } from "./redux/facture/auth/authSlice";
+import { Album } from "./page/Album";
+import { Artists } from "./page/Artists";
 function App() {
   const { isAuthenticated, refresh_token } = useSelector(
     (state) => state.authUser
@@ -53,7 +55,16 @@ function App() {
             path="/playlist/:id"
             element={isAuthenticated ? <PlayLists /> : <Navigate to="/login" />}
           />
+          <Route
+            path="/album/:id"
+            element={isAuthenticated ? <Album /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/artist/:id"
+            element={isAuthenticated ? <Artists /> : <Navigate to="/login" />}
+          />
         </Routes>
+        
       </Layout>
     </>
   );
