@@ -4,7 +4,7 @@ import { useGetPlayListsQuery } from "../../redux/facture/stateHome/playLists";
 import { LoaderCard } from "../loader/LoaderCard";
 export const Players = () => {
   const { responseToken } = useSelector((state) => state.authUser);
-  const { data, isLoading  } = useGetPlayListsQuery(responseToken.access_token);
+  const { data, isLoading  } = useGetPlayListsQuery(responseToken?.access_token);
   //console.log(error)
   return (
     <div>

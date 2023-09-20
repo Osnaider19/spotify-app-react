@@ -121,7 +121,10 @@ export const AlbumDetails = () => {
                     </Td>
                     <Td>
                       <div>
-                        <Link to={`/track/${track.id}`} className="hover:underline">
+                        <Link
+                          to={`/track/${track.id}`}
+                          className="hover:underline"
+                        >
                           <p>{track.name}</p>
                         </Link>
                       </div>

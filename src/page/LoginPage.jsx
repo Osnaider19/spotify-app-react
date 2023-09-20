@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate , useLocation, redirect } from "react-router-dom";
 import { setIsAuthenticated , setRefreshToken , setResponseToken } from "../redux/facture/auth/authSlice";
 
-export function Login() {
+export function LoginPage() {
   const { refresh_token } = useSelector((state) => state.authUser);
   const state = useSelector((state) => state.authUser);
   const Location = useLocation();

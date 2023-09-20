@@ -1,8 +1,8 @@
-
 import { AlbumsPrincipal } from "../components/albums/AlbumsPrincipal";
 import { Players } from "../components/players/Players";
 
-export function Home() {
+
+export function HomePage() {
   
   return (
     <section className="bg-[#121212]">

@@ -1,7 +1,7 @@
 import { AlbumDetails } from "../components/albums/AlbumDetails"
 
 
-export const Album = () => {
+export const AlbumPage = () => {
   return (
    <AlbumDetails/>
   )

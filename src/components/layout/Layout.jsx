@@ -9,7 +9,7 @@ export function Layout({ children }) {
         <Nav />
         <div className="relative w-full h-full mx-2 rounded-lg overflow-hidden overflow-y-auto">
           <Header />
-          <main className="relative h-[86vh] overflow-hidden rounded-lg  layout">
+          <main className="relative h-[86vh] overflow-hidden overflow-y-auto rounded-lg  layout">
             {children}
           </main>
         </div>

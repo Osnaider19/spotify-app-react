@@ -1,7 +1,7 @@
 import { Artist } from "../components/artist/Artist"
 
 
-export const Artists = () => {
+export const ArtistsPage = () => {
   return (
     <Artist/>
   )

@@ -8,10 +8,10 @@
 .layout::-webkit-scrollbar{
     width: 13px;
     background-color: transparent;
-    display: none;
+    display: inline-block;
 }
 .layout::-webkit-scrollbar-thumb{
-    display: none;
+    display: inline-block;
     background-color: transparent;
     width: 8px;
     transition: all 1s ease-out;

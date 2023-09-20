@@ -1,7 +1,7 @@
 import React from 'react'
 import { PlayList } from '../components/playlist/PlayList'
 
-export const PlayLists = () => {
+export const PlayListsPage = () => {
   return (
     <PlayList/>
   )

@@ -1,17 +1,17 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { Home } from "./page/Home";
-import { Login } from "./page/Login";
+import { HomePage } from "./page/HomePage";
 import { Layout } from "./components/layout/Layout";
 import { Navigate } from "react-router-dom";
-import { PlayLists } from "./page/PlayLists";
 import { Toaster } from "sonner";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SpotfifyAuth } from "./helpers/auth";
 import { setResponseToken } from "./redux/facture/auth/authSlice";
-import { Album } from "./page/Album";
-import { Artists } from "./page/Artists";
+import { LoginPage } from "./page/LoginPage";
+import { AlbumPage } from "./page/AlbumPage";
+import { ArtistsPage } from "./page/ArtistsPage";
+import { PlayListsPage } from "./page/PlayListsPage";
 function App() {
   const { isAuthenticated, refresh_token } = useSelector(
     (state) => state.authUser
@@ -44,24 +44,24 @@ function App() {
         <Routes>
           <Route
             path="/login"
-            element={isAuthenticated ? <Navigate to="/" /> : <Login />}
+            element={isAuthenticated ? <Navigate to="/" /> : <LoginPage />}
           />
 
           <Route
             path="/"
-            element={isAuthenticated ? <Home /> : <Navigate to="/login" />}
+            element={isAuthenticated ? <HomePage /> : <Navigate to="/login" />}
           />
           <Route
             path="/playlist/:id"
-            element={isAuthenticated ? <PlayLists /> : <Navigate to="/login" />}
+            element={isAuthenticated ? <PlayListsPage /> : <Navigate to="/login" />}
           />
           <Route
             path="/album/:id"
-            element={isAuthenticated ? <Album /> : <Navigate to="/login" />}
+            element={isAuthenticated ? <AlbumPage /> : <Navigate to="/login" />}
           />
           <Route
             path="/artist/:id"
-            element={isAuthenticated ? <Artists /> : <Navigate to="/login" />}
+            element={isAuthenticated ? <ArtistsPage /> : <Navigate to="/login" />}
           />
         </Routes>
         
