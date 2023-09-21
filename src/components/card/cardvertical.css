@@ -1,0 +1,45 @@
+.content__card__vertical{
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    gap: 10px;
+    max-width: 323px; 
+    min-width: 323px; 
+    border-radius: 5px;
+    background: rgba(255,255,255,0.1);
+   -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+}
+.content__card__vertical__img{
+    width: 80px;
+    height: 80px;
+}
+.content__card__vertical__img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.content__card__vertical__name span{
+    font-weight: 900;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+}
+.content__card__vertical button{
+    position: absolute;
+    right: 0.75rem;
+    height: 45px;
+    width: 45px;
+    background-color: #1FDF64;
+    border-radius: 50%;
+    top: 20px;
+    z-index: 10;
+    opacity: 0;
+    transition: all .3s ease-out;
+}
+.content__card__vertical:hover{
+    background-color: #3d4345;
+}
+.content__card__vertical:hover button{
+    opacity: 1;
+}
