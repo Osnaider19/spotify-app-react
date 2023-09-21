@@ -1,5 +1,5 @@
 import React from "react";
-import "./Cardvertical.css";
+import "./cardvertical.css";
 import { FaPlay } from "react-icons/fa";
 import { Link } from "react-router-dom";
 export const CardVertical = ({ imagen, name , link }) => {
