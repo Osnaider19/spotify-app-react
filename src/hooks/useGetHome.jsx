@@ -11,13 +11,13 @@ export const useGetHome = (token) => {
 
       try {
         const [PlayListsResponse, AlbumsResponse , PlayListUserResponse] = await Promise.all([
-          fetch(`https://api.spotify.com/v1/browse/featured-playlists?country=CO`, {
+          fetch(`https://api.spotify.com/v1/browse/featured-playlists?country=CO&limit=10`, {
             method: "GET",
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }),
-          fetch(`https://api.spotify.com/v1/browse/new-releases`, {
+          fetch(`https://api.spotify.com/v1/browse/new-releases?limit=10`, {
             method: "GET",
             headers: {
               Authorization: `Bearer ${token}`,

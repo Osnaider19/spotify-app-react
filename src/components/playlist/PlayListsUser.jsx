@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { FiMusic } from "react-icons/fi";
 export const PlayListsUser = () => {
   const { playListsUser } = useSelector((state) => state.playLists);
-
   return (
     <div className="px-4 mt-3 ">
       {playListsUser?.map((lists) => (
