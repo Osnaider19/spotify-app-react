@@ -57,7 +57,7 @@ export const Songs = ({ tracks }) => {
                 <div className="flex flex-col px-3">
                   <Link
                     to={`/${track.type}/${track.id}`}
-                    className=" hover:underline"
+                    className=" hover:underline line-clamp-1 "
                   >
                     {track?.name}
                   </Link>
