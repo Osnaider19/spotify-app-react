@@ -4,7 +4,7 @@ import { Card } from "../card/Card";
 export const PlayListsHome = ({ playlists }) => {
   return (
     <div>
-      <div className="flex flex-wrap justify-start gap-4">
+      <div className="flex flex-wrap justify-between gap-4">
         {playlists?.map((items) => (
           <div key={items.id} className="max-w-[180px]">
             <Card

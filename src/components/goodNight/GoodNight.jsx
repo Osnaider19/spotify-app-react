@@ -7,7 +7,7 @@ export const GoodNight = ({data}) => {
     albums : data?.albums?.albums?.items,
   }
   return (
-    <div className="w-full relative h-[260px]  px-4">
+    <div className="w-full relative  px-4">
       <h2 className="py-3 text-3xl font-extrabold">Buenas noches</h2>
       <div className="mt-3 flex justify-between gap-y-4 items-center flex-wrap w-full">
         {select?.playList?.slice(7, 10).map((list) => (

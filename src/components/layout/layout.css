@@ -1,29 +1,28 @@
 
 .layout:hover{
- overflow-y: auto;
-}
-.layout{
-    background-color: #121212;
-}
-.layout::-webkit-scrollbar{
-    width: 13px;
-    background-color: transparent;
-    display: inline-block;
-}
-.layout::-webkit-scrollbar-thumb{
-    display: inline-block;
-    background-color: transparent;
-    width: 8px;
-    transition: all 1s ease-out;
-    overflow: hidden;
-}
-.layout:hover::-webkit-scrollbar-thumb{
-    background-color: rgba(255, 255, 255, .3);
-    width: 8px;
-    transition: all 1s ease-out;
     overflow-y: auto;
-}
-.layout:hover:-webkit-scrollbar{
-    background-color: transparent;
-}
-
+   }
+   .layout{
+       background-color: #121212;
+   }
+   .layout::-webkit-scrollbar{
+       width: 13px;
+       background-color: transparent;
+       display: inline-block;
+   }
+   .layout::-webkit-scrollbar-thumb{
+       display: inline-block;
+       background-color: transparent;
+       width: 8px;
+       transition: all 1s ease-out;
+       overflow: hidden;
+   }
+   .layout:hover::-webkit-scrollbar-thumb{
+       background-color: rgba(255, 255, 255, .3);
+       width: 8px;
+       transition: all 1s ease-out;
+       overflow-y: auto;
+   }
+   .layout:hover:-webkit-scrollbar{
+       background-color: transparent;
+   }

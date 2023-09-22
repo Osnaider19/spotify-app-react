@@ -3,7 +3,7 @@ import { Card } from "../card/Card";
 export const AlbumsHome = ({ albums }) => {
   return (
     <div>
-      <div className="flex flex-wrap justify-start gap-4">
+      <div className="flex flex-wrap justify-between gap-4">
         {albums?.map((album) => (
           <div key={album.id} className="max-w-[180px]">
             <Card
