@@ -12,6 +12,8 @@ import { LoginPage } from "./page/LoginPage";
 import { AlbumPage } from "./page/AlbumPage";
 import { ArtistsPage } from "./page/ArtistsPage";
 import { PlayListsPage } from "./page/PlayListsPage";
+import { TrackPage } from "./page/TrackPage";
+import { NotFound } from "./page/NotFound";
 function App() {
   const { isAuthenticated, refresh_token } = useSelector(
     (state) => state.authUser
@@ -39,21 +41,19 @@ function App() {
   }, []);
   return (
     <>
-      <Toaster closeButton visibleToasts={3} duration={4000} />
+      <Toaster closeButton visibleToasts={4} duration={4000} />
+
       <Layout>
         <Routes>
-          <Route
-            path="/login"
-            element={isAuthenticated ? <Navigate to="/" /> : <LoginPage />}
-          />
-
           <Route
             path="/"
             element={isAuthenticated ? <HomePage /> : <Navigate to="/login" />}
           />
           <Route
             path="/playlist/:id"
-            element={isAuthenticated ? <PlayListsPage /> : <Navigate to="/login" />}
+            element={
+              isAuthenticated ? <PlayListsPage /> : <Navigate to="/login" />
+            }
           />
           <Route
             path="/album/:id"
@@ -61,10 +61,20 @@ function App() {
           />
           <Route
             path="/artist/:id"
-            element={isAuthenticated ? <ArtistsPage /> : <Navigate to="/login" />}
+            element={
+              isAuthenticated ? <ArtistsPage /> : <Navigate to="/login" />
+            }
           />
+          <Route
+            path="/track/:id"
+            element={isAuthenticated ? <TrackPage /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/login"
+            element={isAuthenticated ? <Navigate to="/" /> : <LoginPage />}
+          />
+          <Route path="*" element={<NotFound />} />
         </Routes>
-        
       </Layout>
     </>
   );
