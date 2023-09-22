@@ -43,39 +43,73 @@ function App() {
     <>
       <Toaster closeButton visibleToasts={4} duration={4000} />
 
-      <Layout>
-        <Routes>
-          <Route
-            path="/"
-            element={isAuthenticated ? <HomePage /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/playlist/:id"
-            element={
-              isAuthenticated ? <PlayListsPage /> : <Navigate to="/login" />
-            }
-          />
-          <Route
-            path="/album/:id"
-            element={isAuthenticated ? <AlbumPage /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/artist/:id"
-            element={
-              isAuthenticated ? <ArtistsPage /> : <Navigate to="/login" />
-            }
-          />
-          <Route
-            path="/track/:id"
-            element={isAuthenticated ? <TrackPage /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/login"
-            element={isAuthenticated ? <Navigate to="/" /> : <LoginPage />}
-          />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Layout>
+      <Routes>
+        <Route
+          path="/login"
+          element={isAuthenticated ? <Navigate to="/" /> : <LoginPage />}
+        />
+        <Route path="*" element={<NotFound />} />
+        <Route
+          path="/"
+          element={
+            isAuthenticated ? (
+              <Layout>
+                <HomePage />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/playlist/:id"
+          element={
+            isAuthenticated ? (
+              <Layout>
+                <PlayListsPage />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/album/:id"
+          element={
+            isAuthenticated ? (
+              <Layout>
+                <AlbumPage />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/artist/:id"
+          element={
+            isAuthenticated ? (
+              <Layout>
+                <ArtistsPage />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/track/:id"
+          element={
+            isAuthenticated ? (
+              <Layout>
+                <TrackPage />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      </Routes>
     </>
   );
 }

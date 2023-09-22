@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { BsSpotify } from "react-icons/bs";
 export const NotFound = () => {
   return (
-    <div className="relative h-screen w-full flex flex-col justify-center items-center font-lato">
+    <div className="relative h-screen w-full flex flex-col justify-center items-center font-lato bg-[#121212]">
       <div className="flex justify-center items-center text-green-500 text-5xl">
         <BsSpotify />
       </div>
