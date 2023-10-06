@@ -24,9 +24,26 @@ export function transformDate(fecha) {
     return "hace " + meses + (meses === 1 ? " mes" : " meses");
   }
 }
-
-
 export function transformLikes(numero) {
   return numero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+export function formatDuration(durationMs) {
+  const horas = Math.floor(durationMs / (1000 * 60 * 60));
+  const minutos = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60));
+  const segundos = Math.floor((durationMs % (1000 * 60)) / 1000);
+  let formattedDuration = '';
+  if (horas > 0) {
+    formattedDuration += `${horas} hr `;
+  }
+  if (minutos > 0) {
+    formattedDuration += `${minutos} min `;
+  }
+  if (segundos > 0) {
+    formattedDuration += `${segundos} sec`;
+  }
+  if (formattedDuration === '') {
+    formattedDuration = '0 sec';
+  }
+  return formattedDuration.trim();
 }
 

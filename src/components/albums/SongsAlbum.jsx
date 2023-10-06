@@ -30,7 +30,7 @@ export const SongsAlbum = () => {
   return (
     <Table>
       <Thead>
-        <Th title={"#"} className={"w-[25px]"}/>
+        <Th title={"#"} className={"w-[60px]"} />
         <Th title={"Title"} />
         <Th
           title={
@@ -52,25 +52,27 @@ export const SongsAlbum = () => {
               >
                 <span className="num__list">{index + 1}</span>
                 <BsFillPlayFill className="icono_play" />
-                <div className="w-20px h-[20px]"></div>
+                <div className="w-25px h-[25px]"></div>
               </button>
             </Td>
             <Td>
-              <div className="w-full">
+              <div className="w-full ">
                 <div>
                   <Link to={`/track/${track.id}`} className="hover:underline">
                     <p>{track.name}</p>
                   </Link>
                 </div>
-                {track?.artists?.map((artist) => (
-                  <Link
-                    key={artist.id}
-                    to={`/artist/${artist.id}`}
-                    className="hover:underline text-[#AAA8A9] mr-1"
-                  >
-                    <span>{artist.name}</span>
-                  </Link>
-                ))}
+                <div className="flex w-full max-w-[350px] text-ellipsis line-clamp-1 overflow-hidden justify-start items-center ">
+                  {track?.artists?.map((artist) => (
+                    <Link
+                      to={`/${artist.type}/${artist.id}`}
+                      className="text-[13px] line-clamp-1 text-[#AAA8A9] hover:underline mr-1"
+                      key={artist.id}
+                    >
+                      {artist.name}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </Td>
             <Td>

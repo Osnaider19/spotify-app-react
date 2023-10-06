@@ -2,11 +2,11 @@ import React from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import "./menudrop.css";
 import { BiSolidUserCircle, BiCheck } from "react-icons/bi";
-import { TbPointFilled } from "react-icons/tb";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setSession } from "../../redux/facture/auth/authSlice";
 export const MenuDropUser = () => {
+  const { infoUser } = useSelector((state) => state.authUser);
   const dispatch = useDispatch();
   const navegation = useNavigate();
   const handelSesion = () => {
@@ -17,7 +17,13 @@ export const MenuDropUser = () => {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
         <button className="IconButton" aria-label="Customise options">
-          <BiSolidUserCircle />
+          <div className="w-[30px] h-[30px] rounded-full overflow-hidden">
+            <img
+              src={infoUser.image.url}
+              alt={infoUser.name}
+              className="w-full h-full object-cover"
+            />
+          </div>
         </button>
       </DropdownMenu.Trigger>
 

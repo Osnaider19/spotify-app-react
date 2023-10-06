@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { NavPlay } from "./NavPlay";
 import { Songs } from "./Songs";
 import { TbPointFilled } from "react-icons/tb";
-import { transformLikes } from "../../helpers/transform";
+import { formatDuration, transformLikes } from "../../helpers/transform";
 import { LoaderPlayList } from "../loader/LoaderPlayList";
 import { useGetDetailsPlayList } from "../../hooks/useGetDetailsPlayList";
 import { useEffect } from "react";
@@ -19,12 +19,20 @@ export const PlayListDetails = () => {
     nameUser: data?.data?.owner?.display_name,
     like: data?.data?.followers?.total,
     tracks: data?.data?.tracks?.items,
+    totalDuration: data?.data?.tracks?.items.reduce((total, { track }) => {
+      if (track) {
+        const duration = track.duration_ms;
+        const result = total + duration;
+        return result;
+      }
+    }, 0),
   };
   useEffect(() => {
     refetch();
+    scrollTo(0, 0);
   }, [id]);
   if (isLoading) return <LoaderPlayList />;
-  console.log(select.tracks)
+
   return (
     <>
       <div className="relative min-w-full w-full h-full font-lato">
@@ -68,9 +76,13 @@ export const PlayListDetails = () => {
                       <TbPointFilled className="inline-block text-[9px] " />
                     </>
                   )}
-
                   <span className="px-1 text-sm">
                     {select?.tracks?.length} songs
+                  </span>
+                  <TbPointFilled className="inline-block text-[9px] " />
+                  <span className="px-1 text-sm text-[#AAA8A9]">
+                    {select.totalDuration &&
+                      formatDuration(select.totalDuration)}
                   </span>
                 </div>
               </div>

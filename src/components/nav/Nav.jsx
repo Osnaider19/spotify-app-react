@@ -8,7 +8,7 @@ export const Nav = () => {
   return (
     <nav className="sticky top-0 left-0   h-[86vh] min-w-[300px]  rounded-xl overflow-hidden">
       <div className="flex flex-col gap-y-3">
-        <div className="relative h-32 w-full bg-[#121212] rounded-xl">
+        <div className="relative h-[112px] w-full bg-[#121212] rounded-lg">
           <div className="flex flex-col px-5 items-center justify-center py-2  h-full">
             <ItemNav icon={<IconHome />} link={"/"} title="Home" />
             <ItemNav icon={<IconSearch />} link={"/search"} title="Search" />

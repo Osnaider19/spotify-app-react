@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { LoaderPlayList } from "../loader/LoaderPlayList";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { TbPointFilled } from "react-icons/tb";
 import { NavPlay } from "../playlist/NavPlay";
 import { useGetDetailsAlbum } from "../../hooks/useGetDetailsAlbum";
 import { SongsAlbum } from "./SongsAlbum";
+import { formatDuration } from "../../helpers/transform";
 export const AlbumDetails = () => {
   const { data, isLoading } = useGetDetailsAlbum();
+  const { id } = useParams;
   const select = {
     type: data?.data?.type,
     name: data?.data?.name,
@@ -19,8 +21,19 @@ export const AlbumDetails = () => {
     description: data?.data?.label,
     linkUser: data?.data?.artists[0].id,
     nameUser: data?.data?.artists[0].name,
+    date: new Date(data?.data?.release_date).getFullYear(),
+    totalduration: data?.data?.tracks?.items.reduce((total, track) => {
+      if (track) {
+        const duration = track.duration_ms;
+        const result = total + duration;
+        return result;
+      }
+    }, 0),
   };
 
+  useEffect(() => {
+    scrollTo(0, 0);
+  }, [id]);
   if (isLoading) return <LoaderPlayList />;
 
   return (
@@ -33,7 +46,7 @@ export const AlbumDetails = () => {
           <div className="min-h-[240px] min-w-[240px] max-h-[240px] max-w-[240px] w-full h-full overflow-hidden shadow-2xl">
             <div className="w-full h-full">
               <img
-                src={select.imagen}
+                src={select?.imagen}
                 id="bg_playlist"
                 alt=""
                 className="w-full h-full imagen"
@@ -43,22 +56,31 @@ export const AlbumDetails = () => {
           <div className="w-full min-h-full">
             <div className="flex flex-col min-h-full justify-end items-start px-4">
               <div className="w-full">
-                <p className="capitalize ">{select.type}</p>
+                <p className="capitalize ">{select?.type}</p>
                 <p className="font-lato font-black py-1 text-5xl  w-full">
-                  {select.name}
+                  {select?.name}
                 </p>
                 <span className="py-2 block text-[#AAA8A9] font-semibold text-sm">
-                  {select.description}
+                  {select?.description}
                 </span>
                 <div className="py-1">
-                  <Link to={`/artist/${select.linkUser}`}>
+                  <Link to={`/artist/${select?.linkUser}`}>
                     <strong className="hover:underline px-1 text-sm">
-                      {select.nameUser}
+                      {select?.nameUser}
                     </strong>
                   </Link>
                   <TbPointFilled className="inline-block text-[9px]" />
-                  <span className="px-1 text-sm">
+                  <span className="px-1 text-sm font-semibold">
+                    {select?.date}
+                  </span>
+                  <TbPointFilled className="inline-block text-[9px]" />
+                  <span className="px-1 text-sm font-semibold">
                     {select?.tracks?.length} songs
+                  </span>
+                  <TbPointFilled className="inline-block text-[9px]" />
+                  <span className="px-1 text-sm font-semibold text-[#AAA8A9]">
+                    {select.totalduration &&
+                      formatDuration(select.totalduration)}
                   </span>
                 </div>
               </div>

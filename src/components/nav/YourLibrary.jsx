@@ -6,7 +6,7 @@ export const YourLibrary = () => {
   return (
     <section className="px-4 mt-3">
       <div className="flex justify-between items-center my-2">
-        <div className="flex gap-x-3 justify-center items-center">
+        <div className="flex gap-x-3 justify-center items-center text-[#ffffff80] ">
           <i className="text-2xl">
             <IconLibrary/>
           </i>

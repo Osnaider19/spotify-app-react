@@ -12,11 +12,11 @@ import { PlayListsPage } from "./page/PlayListsPage";
 import { TrackPage } from "./page/TrackPage";
 import { NotFound } from "./page/NotFound";
 import { useEffect } from "react";
-import { setResponseToken } from "./redux/facture/auth/authSlice";
+import { setInfoUser, setResponseToken } from "./redux/facture/auth/authSlice";
 import { SpotfifyAuth } from "./helpers/auth";
 
 function App() {
-  const { isAuthenticated, refresh_token } = useSelector(
+  const { isAuthenticated, refresh_token, responseToken } = useSelector(
     (state) => state.authUser
   );
 
@@ -38,11 +38,28 @@ function App() {
       console.log(error);
     }
   };
-
+  const getInfoUser = async () => {
+    const url = "https://api.spotify.com/v1/me";
+    const token = responseToken?.access_token;
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const infUser = await res.json();
+    dispatch(
+      setInfoUser({
+        image: infUser.images[0],
+        name: infUser.display_name,
+        id: infUser.id,
+      })
+    );
+  };
   useEffect(() => {
     useRefreshToken();
+    getInfoUser();
   }, []);
-
   return (
     <>
       <Toaster closeButton visibleToasts={4} duration={4000} />
