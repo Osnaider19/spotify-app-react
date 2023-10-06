@@ -1,14 +1,14 @@
 "use client";
 import { MdAdd } from "react-icons/md";
 import { BiRightArrowAlt } from "react-icons/bi";
-import { VscLibrary } from "react-icons/vsc";
+import { IconLibrary } from "../../Icons/Icons";
 export const YourLibrary = () => {
   return (
     <section className="px-4 mt-3">
       <div className="flex justify-between items-center my-2">
         <div className="flex gap-x-3 justify-center items-center">
           <i className="text-2xl">
-            <VscLibrary />
+            <IconLibrary/>
           </i>
           <span>Your Librery</span>
         </div>

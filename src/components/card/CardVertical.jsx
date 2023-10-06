@@ -10,7 +10,7 @@ export const CardVertical = ({ imagen, name , link }) => {
           <img src={imagen} alt={name} />
         </div>
         <div className="content__card__vertical__name">
-          <span>{name}</span>
+          <span className="line-clamp-1">{name}</span>
         </div>
         <button>
           <i className="w-full h-full flex justify-center items-center text-black">

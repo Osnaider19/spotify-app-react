@@ -27,8 +27,8 @@
     width: 100%;
 }
 .content__card__vertical__name span{
-    font-weight: 900;
-    font-size: 18px;
+    font-weight: 700;
+    font-size: 16px;
     letter-spacing: 0.5px;
 }
 .content__card__vertical button{

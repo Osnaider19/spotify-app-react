@@ -2,7 +2,7 @@ import { SpotfifyAuth } from "../helpers/auth";
 import { useEffect, useCallback } from "react";
 import { CLIENT_ID, REDIRECT_URI } from "../config/config";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate , useLocation, redirect } from "react-router-dom";
+import { useNavigate , useLocation } from "react-router-dom";
 import { setIsAuthenticated , setRefreshToken , setResponseToken } from "../redux/facture/auth/authSlice";
 
 export function LoginPage() {
@@ -20,11 +20,9 @@ export function LoginPage() {
             grant_type: "refresh_token",
             refresh_token: refresh_token,
           });
-          console.log(res);
         } else {
           res = await SpotfifyAuth({ code, grant_type: "authorization_code" });
           dispatch(setRefreshToken(res?.refresh_token));
-          console.log(res)
         }
         if (res?.access_token) {
           dispatch(setIsAuthenticated(true));
@@ -32,7 +30,6 @@ export function LoginPage() {
         } else {
           console.log("user no authenticated");
         }
-        console.log(res);
         navigate("/");
       } catch (error) {
         console.log(error);
@@ -56,8 +53,6 @@ export function LoginPage() {
     if (spotifyCode) authenticateUser(spotifyCode);
   }, [Location.search]);
 
-
-  console.log(state);
   const handleLogin = () => {
     const scope = "user-read-private user-read-email";
     const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";

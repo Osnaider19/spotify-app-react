@@ -1,12 +1,15 @@
-import { BsPlayBtn } from "react-icons/bs";
-import { TbMicrophone2 } from "react-icons/tb";
-import { TfiAlignJustify } from "react-icons/tfi";
-import { BsDeviceHdd } from "react-icons/bs";
 import { IoMdVolumeHigh } from "react-icons/io";
 import { BiVolumeMute } from "react-icons/bi";
 import "./vol.css";
 import { useState } from "react";
 import * as Slider from "@radix-ui/react-slider";
+import {
+  IconConnectDivice,
+  IconLyrics,
+  IconPicture,
+  IconPlaying,
+  IconQueue,
+} from "../../Icons/Icons";
 
 export const Vol = ({ audioRef }) => {
   const [volume, setVolume] = useState(1);
@@ -23,26 +26,26 @@ export const Vol = ({ audioRef }) => {
     setVolume(audioMuted ? 1 : 0);
   };
   return (
-    <div className="flex flex-grow justify-end px-3 items-center ">
+    <div className="flex  justify-end px-3 items-center max-w-[360px] w-full">
       <div className="flex gap-x-3">
         <button>
           <i className="text-xl text-[#ffffff80] cursor-pointer hover:scale-105 transition-all duration-200 hover:text-white">
-            <BsPlayBtn />
+            <IconPlaying />
           </i>
         </button>
         <button>
           <i className="text-xl text-[#ffffff80] cursor-pointer hover:scale-105 transition-all duration-200 hover:text-white">
-            <TbMicrophone2 />
+            <IconLyrics />
           </i>
         </button>
         <button>
           <i className="text-xl text-[#ffffff80] cursor-pointer hover:scale-105 transition-all duration-200 hover:text-white">
-            <TfiAlignJustify />
+            <IconQueue />
           </i>
         </button>
         <button>
           <i className="text-xl text-[#ffffff80] cursor-pointer hover:scale-105 transition-all duration-200 hover:text-white">
-            <BsDeviceHdd />
+            <IconConnectDivice />
           </i>
         </button>
         <button onClick={handelMute}>
@@ -68,6 +71,11 @@ export const Vol = ({ audioRef }) => {
             </Slider.Root>
           </div>
         </div>
+        <button>
+          <i className="text-xl text-[#ffffff80] cursor-pointer hover:scale-105 transition-all duration-200 hover:text-white">
+            <IconPicture/>
+          </i>
+        </button>
       </div>
     </div>
   );

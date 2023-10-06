@@ -1,16 +1,28 @@
 import React from "react";
 import { CardVertical } from "../card/CardVertical";
 
-export const GoodNight = ({data}) => {
+export const GoodNight = ({ data }) => {
   const select = {
-    playList : data?.playList?.playlists?.items,
-    albums : data?.albums?.albums?.items,
+    playList: data?.playList?.playlists?.items,
+    albums: data?.albums?.albums?.items,
+  };
+  function saludoSegunHora() {
+    const horaActual = new Date().getHours();
+    if (horaActual >= 5 && horaActual < 12) {
+      return "Buenos días";
+    } else if (horaActual >= 12 && horaActual < 18) {
+      return "Buenas tardes";
+    } else {
+      return "Buenas noches";
+    }
   }
+
+  const saludo = saludoSegunHora();
   return (
     <div className="w-full relative  px-4">
-      <h2 className="py-3 text-3xl font-extrabold">Buenas noches</h2>
-      <div className="mt-3 flex justify-between gap-y-4 items-center flex-wrap w-full">
-        {select?.playList?.slice(7, 10).map((list) => (
+      <h2 className="py-3 text-3xl font-extrabold">{saludo}</h2>
+      <div className="mt-3 grid grid-rows-2 grid-cols-3 gap-3 w-full">
+        {select?.playList?.slice(0, 3).map((list) => (
           <CardVertical
             key={list.id}
             imagen={

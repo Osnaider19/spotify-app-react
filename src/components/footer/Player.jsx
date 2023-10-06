@@ -7,6 +7,7 @@ import { transformDuration } from "../../helpers/transform";
 import { ButtonPlay } from "./ButtonPlay";
 import * as Slider from "@radix-ui/react-slider";
 import "./player.css";
+import { IconNext, IconPreviuw, IconRepeat, IconShuffle } from "../../Icons/Icons";
 export const Player = ({ audioRef }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -25,10 +26,10 @@ export const Player = ({ audioRef }) => {
   };
 
   return (
-    <div>
-      <div className="flex justify-center items-center gap-x-3 py-1 ">
-        <ButtonRunSong icon={<BsShuffle className="text-xl" />} />
-        <ButtonRunSong icon={<BiSkipPrevious className="text-4xl" />} />
+    <div className="flex flex-col  flex-grow justify-center">
+      <div className="flex justify-center items-center gap-x-7 py-1 ">
+        <ButtonRunSong icon={<IconShuffle/>} />
+        <ButtonRunSong icon={<IconPreviuw />} />
         <div>
           <ButtonPlay audioRef={audioRef} />
           <audio
@@ -38,8 +39,8 @@ export const Player = ({ audioRef }) => {
             onTimeUpdate={handleTimeUpdate}
           ></audio>
         </div>
-        <ButtonRunSong icon={<BiSkipNext className="text-4xl" />} />
-        <ButtonRunSong icon={<BsRepeat className="text-xl" />} />
+        <ButtonRunSong icon={<IconNext/>} />
+        <ButtonRunSong icon={<IconRepeat />} />
       </div>
       <div>
         <div className="flex justify-center items-center  text-[11px] ">

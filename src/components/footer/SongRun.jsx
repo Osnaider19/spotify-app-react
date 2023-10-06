@@ -19,9 +19,9 @@ export const SongRun = () => {
   }
   return (
     <>
-      <div className="flex flex-grow  min-w-[470px] ">
+      <div className="flex w-full  max-w-[450px]">
         <div className="flex px-2 py-1 gap-x-5 justify-center items-center">
-          <div className="h-[55px] w-[55px]  rounded-lg overflow-hidden">
+          <div className="min-h-[55px] min-w-[55px]  rounded-lg overflow-hidden">
             <img
               src={track?.album?.images[2]?.url ? track?.album?.images[2]?.url : track?.album?.images[0]?.url}
               alt=""
@@ -29,17 +29,17 @@ export const SongRun = () => {
             />
           </div>
           <div>
-            <Link to={`track/${track?.id}`} className="text-sm hover:underline">
+            <Link to={`track/${track?.id}`} className="text-sm hover:underline line-clamp-1">
               {track?.name}
             </Link>
-            <div className="text-[12px] flex justify-start items-center">
+            <div className="text-[12px] flex justify-start items-center overflow-hidden  line-clamp-1">
               {track?.artists?.map((artist) => (
                 <Link
                   key={artist.id}
                   to={`artist/${artist.id}`}
                   className="hover:underline mr-2"
                 >
-                  {artist.name}
+                  <span>{artist.name}</span>
                 </Link>
               ))}
             </div>
