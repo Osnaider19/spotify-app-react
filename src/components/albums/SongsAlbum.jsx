@@ -30,7 +30,7 @@ export const SongsAlbum = () => {
   return (
     <Table>
       <Thead>
-        <Th title={"#"} />
+        <Th title={"#"} className={"w-[25px]"}/>
         <Th title={"Title"} />
         <Th
           title={
@@ -56,20 +56,22 @@ export const SongsAlbum = () => {
               </button>
             </Td>
             <Td>
-              <div>
-                <Link to={`/track/${track.id}`} className="hover:underline">
-                  <p>{track.name}</p>
-                </Link>
+              <div className="w-full">
+                <div>
+                  <Link to={`/track/${track.id}`} className="hover:underline">
+                    <p>{track.name}</p>
+                  </Link>
+                </div>
+                {track?.artists?.map((artist) => (
+                  <Link
+                    key={artist.id}
+                    to={`/artist/${artist.id}`}
+                    className="hover:underline text-[#AAA8A9] mr-1"
+                  >
+                    <span>{artist.name}</span>
+                  </Link>
+                ))}
               </div>
-              {track?.artists?.map((artist) => (
-                <Link
-                  key={artist.id}
-                  to={`/artist/${artist.id}`}
-                  className="hover:underline text-[#AAA8A9] mr-1"
-                >
-                  <span>{artist.name}</span>
-                </Link>
-              ))}
             </Td>
             <Td>
               <div className="flex gap-x-3 justify-end items-center  px-2">

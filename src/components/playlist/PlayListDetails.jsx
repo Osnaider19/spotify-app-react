@@ -24,6 +24,7 @@ export const PlayListDetails = () => {
     refetch();
   }, [id]);
   if (isLoading) return <LoaderPlayList />;
+  console.log(select.tracks)
   return (
     <>
       <div className="relative min-w-full w-full h-full font-lato">
