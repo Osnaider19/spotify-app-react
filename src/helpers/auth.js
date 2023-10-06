@@ -14,7 +14,7 @@ export const SpotfifyAuth = async (requeredParams) => {
       ...commonParams,
     };
     const searchParams = Object.keys(params).map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(params[key])).join("&")
-    console.log(searchParams)
+    //console.log(searchParams)
     
     const spotifyCall = await apiCall({
       method: "POST",
@@ -22,7 +22,7 @@ export const SpotfifyAuth = async (requeredParams) => {
       body: searchParams,
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
     });
-    console.log(spotifyCall);
+    //console.log(spotifyCall);
     return await spotifyCall.json();
   } catch (error) {
     console.log(error);

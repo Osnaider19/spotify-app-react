@@ -46,39 +46,29 @@ function App() {
   return (
     <>
       <Toaster closeButton visibleToasts={4} duration={4000} />
-      <Layout>
-        <Routes>
+      <Routes>
+        <Route
+          path="/login"
+          element={isAuthenticated ? <Navigate to="/" /> : <LoginPage />}
+        />
+        {isAuthenticated && (
           <Route
-            path="/login"
-            element={isAuthenticated ? <Navigate to="/" /> : <LoginPage />}
-          />
-          <Route
-            path="/"
-            element={isAuthenticated ? <HomePage /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/playlist/:id"
+            path="/*"
             element={
-              isAuthenticated ? <PlayListsPage /> : <Navigate to="/login" />
+              <Layout>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/playlist/:id" element={<PlayListsPage />} />
+                  <Route path="/album/:id" element={<AlbumPage />} />
+                  <Route path="/artist/:id" element={<ArtistsPage />} />
+                  <Route path="/track/:id" element={<TrackPage />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Layout>
             }
           />
-          <Route
-            path="/album/:id"
-            element={isAuthenticated ? <AlbumPage /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/artist/:id"
-            element={
-              isAuthenticated ? <ArtistsPage /> : <Navigate to="/login" />
-            }
-          />
-          <Route
-            path="/track/:id"
-            element={isAuthenticated ? <TrackPage /> : <Navigate to="/login" />}
-          />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Layout>
+        )}
+      </Routes>
     </>
   );
 }

@@ -44,7 +44,7 @@ export const PlayListDetails = () => {
           <div className="w-full min-h-full">
             <div className="flex flex-col min-h-full justify-end items-start px-4">
               <div className="w-full">
-                <p className="capitalize ">{select.type}</p>
+                <p className="capitalize ">{select?.type}</p>
                 <p className="font-lato font-black py-1 text-5xl  w-full">
                   {select.name}
                 </p>

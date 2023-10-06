@@ -28,7 +28,6 @@ export const getHome = async (token) => {
 
   const playList = await PlayListsResponse.json();
   const albums = await AlbumsResponse.json();
-  console.log(playList, albums);
   return {
     playList,
     albums,
