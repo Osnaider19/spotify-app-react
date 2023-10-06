@@ -1,39 +1,37 @@
-import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { useFetch } from "../../hooks/useFetch";
 import { NavPlay } from "./NavPlay";
 import { Songs } from "./Songs";
 import { TbPointFilled } from "react-icons/tb";
 import { transformLikes } from "../../helpers/transform";
 import { LoaderPlayList } from "../loader/LoaderPlayList";
+import { useGetDetailsPlayList } from "../../hooks/useGetDetailsPlayList";
+import { useEffect } from "react";
 
 export const PlayListDetails = () => {
-  const { responseToken } = useSelector((state) => state.authUser);
   const { id } = useParams();
-  const url = `https://api.spotify.com/v1/playlists/${id}`;
-  const { data, isPending } = useFetch(url, responseToken?.access_token);
-  console.log(data);
-
+  const { data, isLoading, refetch } = useGetDetailsPlayList();
   const select = {
-    imagen: data?.images[0]?.url,
-    type: data?.type,
-    name: data?.name,
-    description: data?.description,
-    linkUser: data?.owner?.href,
-    nameUser: data?.owner?.display_name,
-    like: data?.followers?.total,
-    tracks: data?.tracks?.items,
+    imagen: data?.data?.images[0]?.url,
+    type: data?.data?.type,
+    name: data?.data?.name,
+    description: data?.data?.description,
+    linkUser: data?.data?.owner?.href,
+    nameUser: data?.data?.owner?.display_name,
+    like: data?.data?.followers?.total,
+    tracks: data?.data?.tracks?.items,
   };
-
+  useEffect(() => {
+    refetch();
+  }, [id]);
+  if (isLoading) return <LoaderPlayList />;
   return (
     <>
-      {isPending && <LoaderPlayList />}
       <div className="relative min-w-full w-full h-full font-lato">
         <div
           className={`absolute left-0 top-0 w-full h-full bg-gradient-to-t from-transparent via-[#292331] to-[#3a343670]`}
         ></div>
         <div className="relative flex z-10 pt-[85px] px-6 w-full">
-          <div className="max-h-[240px] max-w-[240px] w-full h-full overflow-hidden shadow-2xl">
+          <div className="min-h-[240px] min-w-[240px] max-h-[240px] max-w-[240px] w-full h-full overflow-hidden shadow-2xl">
             <div className="w-full h-full">
               <img
                 src={select.imagen}

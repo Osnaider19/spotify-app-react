@@ -1,29 +1,20 @@
-import { useDispatch, useSelector } from "react-redux";
 import { AlbumsHome } from "../components/albums/AlbumsHome";
-import { useGetHome } from "../hooks/useGetHome";
 import { PlayListsHome } from "../components/playlist/PlayListsHome";
-import { setPlayListUser } from "../redux/facture/playlists/playLists";
 import { useEffect } from "react";
 import { LoaderCard } from "../components/loader/LoaderCard";
 import { BackgroundHome } from "../components/backgrounds/BackgroundHome";
 import { GoodNight } from "../components/goodNight/GoodNight";
+import {  useGetHome } from "../hooks/useGetHome";
 
 export function HomePage() {
-  const dispatch = useDispatch();
-  const { responseToken } = useSelector((state) => state.authUser);
-  const { data, isPending, error } = useGetHome(responseToken?.access_token);
-
-  console.log(data);
+  const { data , isLoading} = useGetHome();
   useEffect(() => {
-    if (data?.playListUser?.items) {
-      dispatch(setPlayListUser(data.playListUser.items));
-    }
     scrollTo(0, 0);
-  }, [data, dispatch]);
+  }, []);
   return (
     <section className="min-w-full w-full overflow-hidden overflow-y-auto">
       <div className="relative  flex flex-col gap-x-4 justify-start items-start w-full h-full flex-wrap gap-y-3 pt-[65px]">
-        {isPending && <LoaderCard />}
+        {isLoading && <LoaderCard />}
         <BackgroundHome />
         <GoodNight data={data} />
         <div className="px-4">

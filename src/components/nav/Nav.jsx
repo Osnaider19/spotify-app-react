@@ -1,6 +1,4 @@
 import { ItemNav } from "./ItemNav";
-import { BsSearch } from "react-icons/bs";
-import { AiFillHome } from "react-icons/ai";
 import { YourLibrary } from "./YourLibrary";
 import { PlayLists } from "./PlayLists";
 import { PlayListsUser } from "../playlist/PlayListsUser";

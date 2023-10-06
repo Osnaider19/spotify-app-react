@@ -3,8 +3,31 @@ import { Link } from "react-router-dom";
 import { TbPointFilled } from "react-icons/tb";
 import { useSelector } from "react-redux";
 import { FiMusic } from "react-icons/fi";
+import { useQuery } from "@tanstack/react-query";
 export const PlayListsUser = () => {
-  const { playListsUser } = useSelector((state) => state.playLists);
+  const { responseToken } = useSelector((state) => state.authUser);
+  const token = responseToken?.access_token;
+   const getPlayList = async ()=> {
+   const res = await fetch(`https://api.spotify.com/v1/me/playlists`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+   })
+   if(!res.ok) {
+    throw new Error("error al obtener las playlist de el usuario")
+   };
+   const data = await res.json();
+   return {
+    data
+   }
+  }
+  const { data , isLoading } = useQuery(["playListUser"] , getPlayList)
+  const playListsUser = data?.data.items
+  
+  //hacer el loader de las playlist 
+
   return (
     <div className="px-4 mt-3 ">
       {playListsUser?.map((lists) => (
