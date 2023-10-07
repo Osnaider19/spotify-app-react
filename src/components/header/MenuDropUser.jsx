@@ -1,10 +1,11 @@
 import React from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import "./menudrop.css";
-import { BiSolidUserCircle, BiCheck } from "react-icons/bi";
+import { BiCheck } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setSession } from "../../redux/facture/auth/authSlice";
+import { IconUser } from "../../Icons/Icons";
 export const MenuDropUser = () => {
   const { infoUser } = useSelector((state) => state.authUser);
   const dispatch = useDispatch();
@@ -17,12 +18,18 @@ export const MenuDropUser = () => {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
         <button className="IconButton" aria-label="Customise options">
-          <div className="w-[30px] h-[30px] rounded-full overflow-hidden">
-            <img
-              src={infoUser.image.url}
-              alt={infoUser.name}
-              className="w-full h-full object-cover"
-            />
+          <div className="w-[30px] h-[30px] rounded-full overflow-hidden flex justify-center items-center">
+            {infoUser?.image?.url ? (
+              <img
+                src={infoUser?.image?.url}
+                alt={infoUser?.name}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <span className="text-white">
+                 <IconUser />
+              </span>
+            )}
           </div>
         </button>
       </DropdownMenu.Trigger>

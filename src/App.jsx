@@ -50,9 +50,9 @@ function App() {
     const infUser = await res.json();
     dispatch(
       setInfoUser({
-        image: infUser.images[0],
-        name: infUser.display_name,
-        id: infUser.id,
+        image: infUser?.images[0] ?? null,
+        name: infUser?.display_name,
+        id: infUser?.id,
       })
     );
   };
@@ -63,29 +63,45 @@ function App() {
   return (
     <>
       <Toaster closeButton visibleToasts={4} duration={4000} />
-      <Routes>
-        <Route
-          path="/login"
-          element={isAuthenticated ? <Navigate to="/" /> : <LoginPage />}
-        />
-        {isAuthenticated && (
+      <Layout>
+        <Routes>
           <Route
-            path="/*"
+            path="/login"
+            element={isAuthenticated ? <Navigate to="/" /> : <LoginPage />}
+          />
+          <Route
+            path="/"
             element={
-              <Layout>
-                <Routes>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/playlist/:id" element={<PlayListsPage />} />
-                  <Route path="/album/:id" element={<AlbumPage />} />
-                  <Route path="/artist/:id" element={<ArtistsPage />} />
-                  <Route path="/track/:id" element={<TrackPage />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Layout>
+              isAuthenticated ? <HomePage /> : <Navigate to={"/login"} />
             }
           />
-        )}
-      </Routes>
+          <Route
+            path="/playlist/:id"
+            element={
+              isAuthenticated ? <PlayListsPage /> : <Navigate to={"/login"} />
+            }
+          />
+          <Route
+            path="/album/:id"
+            element={
+              isAuthenticated ? <AlbumPage /> : <Navigate to={"/login"} />
+            }
+          />
+          <Route
+            path="/artist/:id"
+            element={
+              isAuthenticated ? <ArtistsPage /> : <Navigate to={"/login"} />
+            }
+          />
+          <Route
+            path="/track/:id"
+            element={
+              isAuthenticated ? <TrackPage /> : <Navigate to={"/login"} />
+            }
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Layout>
     </>
   );
 }

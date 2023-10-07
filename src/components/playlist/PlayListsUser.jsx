@@ -24,7 +24,7 @@ export const PlayListsUser = () => {
    }
   }
   const { data , isLoading } = useQuery(["playListUser"] , getPlayList)
-  const playListsUser = data?.data.items
+  const playListsUser = data?.data?.items
   
   //hacer el loader de las playlist 
 
