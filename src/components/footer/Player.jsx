@@ -54,7 +54,7 @@ export const Player = ({ refAudio }) => {
             type="audio"
             onTimeUpdate={handleTimeUpdate}
             onEnded={handelEnded}
-            autoPlay={audioStete.autoplay}
+            autoPlay={audioStete?.autoplay}
           ></audio>
         </div>
         <ButtonRunSong icon={<IconNext />} />
