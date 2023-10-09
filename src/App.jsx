@@ -21,44 +21,45 @@ function App() {
   );
 
   const dispatch = useDispatch();
-  const useRefreshToken = async () => {
-    let res;
-    try {
-      if (refresh_token) {
-        res = await SpotfifyAuth({
-          grant_type: "refresh_token",
-          refresh_token: refresh_token,
-        });
-      }
-      if (!res.access_token) {
-        throw new Error("error access token es null");
-      }
-      dispatch(setResponseToken(res));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const getInfoUser = async () => {
-    const url = "https://api.spotify.com/v1/me";
-    const token = responseToken?.access_token;
-    const res = await fetch(url, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const infUser = await res.json();
-    dispatch(
-      setInfoUser({
-        image: infUser?.images[0] ?? null,
-        name: infUser?.display_name,
-        id: infUser?.id,
-      })
-    );
-  };
+
   useEffect(() => {
-    useRefreshToken();
+    const useRefreshToken = async () => {
+      let res;
+      try {
+        if (refresh_token) {
+          res = await SpotfifyAuth({
+            grant_type: "refresh_token",
+            refresh_token: refresh_token,
+          });
+        }
+        if (!res.access_token) {
+          throw new Error("error access token es null");
+        }
+        dispatch(setResponseToken(res));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const getInfoUser = async () => {
+      const url = "https://api.spotify.com/v1/me";
+      const token = responseToken?.access_token;
+      const res = await fetch(url, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const infUser = await res.json();
+      dispatch(
+        setInfoUser({
+          image: infUser?.images[0] ?? null,
+          name: infUser?.display_name,
+          id: infUser?.id,
+        })
+      );
+    };
     getInfoUser();
+    useRefreshToken();
   }, []);
   return (
     <>
