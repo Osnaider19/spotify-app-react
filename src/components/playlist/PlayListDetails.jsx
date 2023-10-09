@@ -6,14 +6,24 @@ import { formatDuration, transformLikes } from "../../helpers/transform";
 import { LoaderPlayList } from "../loader/LoaderPlayList";
 import { useGetDetailsPlayList } from "../../hooks/useGetDetailsPlayList";
 import { useEffect } from "react";
+import { setIsPlaying, setPlayList } from "../../redux/facture/players/players";
+import { useDispatch, useSelector } from "react-redux";
 
 export const PlayListDetails = () => {
   const { id } = useParams();
   const { data, isLoading, refetch } = useGetDetailsPlayList();
+  const { currentMusic, isplaying } = useSelector((state) => state.players);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    refetch();
+    scrollTo(0, 0);
+  }, [id]);
+  if (isLoading) return <LoaderPlayList />;
   const select = {
     imagen: data?.data?.images[0]?.url,
     type: data?.data?.type,
     name: data?.data?.name,
+    idPlayList: data?.data.id,
     description: data?.data?.description,
     linkUser: data?.data?.owner?.href,
     nameUser: data?.data?.owner?.display_name,
@@ -27,11 +37,21 @@ export const PlayListDetails = () => {
       }
     }, 0),
   };
-  useEffect(() => {
-    refetch();
-    scrollTo(0, 0);
-  }, [id]);
-  if (isLoading) return <LoaderPlayList />;
+
+  const handelPlay = (id) => {
+    //validamos que si la id de el estado y la id de la paylist actual son igual que 
+    //haga  una sete el isplaying y que pare la cancion si no significa que esta 
+    //actualizando la playlist
+    if (id === currentMusic?.playlists?.id) {
+     dispatch(setIsPlaying(!isplaying))
+    } else {
+      dispatch(
+        setPlayList({
+          id: select.idPlayList,
+        })
+      );
+    }
+  };
 
   return (
     <>
@@ -92,7 +112,7 @@ export const PlayListDetails = () => {
         <div className="relative w-full  h-[500px] mt-8 ">
           <div className="absolute left-0 top-0 h-[400px]  w-full bg-gradient-to-t from-transparent via-black/20 to-black/20"></div>
           <div className="relative z-10">
-            <NavPlay />
+            <NavPlay handelPlay={handelPlay} id={select.idPlayList} />
             <Songs tracks={select.tracks} />
           </div>
         </div>

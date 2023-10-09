@@ -38,11 +38,21 @@
     position: absolute;
     z-index: -1;
     font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
 }
 .num__list{
     position: absolute;
     z-index: 1;
     background-color: #121212;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .tr_content:hover  .button__play .num__list{
     z-index: -1;

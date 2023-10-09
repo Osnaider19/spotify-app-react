@@ -1,19 +1,20 @@
 import { IoIosPause } from "react-icons/io";
-import {BsPlayFill} from 'react-icons/bs'
-import { useState } from "react";
-import { useSelector } from "react-redux";
-export const ButtonPlay = ({ audioRef }) => {
-  const { track } = useSelector((state) => state.players);
-  const [audioPaused, setAudioPaused] = useState(true);
+import { BsPlayFill } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsPlaying } from "../../redux/facture/players/players";
+
+export const ButtonPlay = ({ refAudio }) => {
+  const { track, isplaying } = useSelector((state) => state.players);
+  const dispatch = useDispatch();
   const toggleAudio = () => {
-    const audio = audioRef.current;
+    const audio = refAudio.current;
     if (audio.paused) {
       audio.play();
-      setAudioPaused(false);
+      dispatch(setIsPlaying(true)); // state global
       audio.autoplay = true;
     } else {
       audio.pause();
-      setAudioPaused(true);
+      dispatch(setIsPlaying(false));
     }
   };
   return (
@@ -26,7 +27,7 @@ export const ButtonPlay = ({ audioRef }) => {
       onClick={toggleAudio}
     >
       <i className="flex justify-center items-center text-2xl w-full h-full text-black ">
-        {audioPaused ? <BsPlayFill /> : <IoIosPause />}
+        {isplaying ? <IoIosPause /> : <BsPlayFill />}
       </i>
     </button>
   );

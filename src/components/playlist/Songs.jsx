@@ -4,21 +4,35 @@ import { Tbody } from "../table/Tbody";
 import { Td } from "../table/Td";
 import { Th } from "../table/Th";
 import { Thead } from "../table/Thead";
-import { useDispatch } from "react-redux";
-import { setTrackPlayer } from "../../redux/facture/players/players";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsPlaying, setPlayList, setTrackPlayer } from "../../redux/facture/players/players";
 import { Link } from "react-router-dom";
 import { transformDate, transformDuration } from "../../helpers/transform";
 import { TbPointFilled } from "react-icons/tb";
 import { BiTime } from "react-icons/bi";
 import { useGetDetailsPlayList } from "../../hooks/useGetDetailsPlayList";
+import { Playing } from "../playing/Playing";
 
 export const Songs = () => {
   const { data } = useGetDetailsPlayList();
+  const { track, isplaying } = useSelector((state) => state.players);
+  
   const dispatch = useDispatch();
+  const playlist = data?.data;
   const handelplay = (track) => {
     dispatch(setTrackPlayer(track));
+    dispatch(setPlayList({id : playlist.id}))
+    dispatch(setIsPlaying(true));
   };
   const tracks = data?.data?.tracks?.items;
+  const songId =  track?.id
+  const playing = (id) => {
+    //validar si se este reproduciendo la cancion con el id y renderizar el playing
+    if (id === track?.id && isplaying === true) {
+      return true;
+    }
+    return false;
+  };
   return (
     <Table>
       <Thead>
@@ -46,8 +60,14 @@ export const Songs = () => {
                     handelplay(track);
                   }}
                 >
-                  <span className="num__list">{index + 1}</span>
-                  <BsFillPlayFill className="icono_play" />
+                  {playing(track?.id) && track.preview_url ? (
+                    <Playing />
+                  ) : (
+                    <div className="w-[20px] h-[20px] justify-center items-center">
+                      <span className="num__list">{index + 1}</span>
+                      <BsFillPlayFill className="icono_play" />
+                    </div>
+                  )}
                 </button>
               </Td>
               <Td>
@@ -55,14 +75,14 @@ export const Songs = () => {
                   <div className="max-w-[40px] max-h-[40px] w-full h-full bg-green-400">
                     <img
                       src={track?.album?.images[2]?.url}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover "
                       alt={track?.name}
                     />
                   </div>
                   <div className="flex flex-col px-3">
                     <Link
-                      to={`/track.track/${track?.id}`}
-                      className=" hover:underline line-clamp-1 "
+                      to={`/track/${track?.id}`}
+                      className={`hover:underline line-clamp-1 ${track.id === songId && "text-green-500"}`}
                     >
                       {track?.name}
                     </Link>

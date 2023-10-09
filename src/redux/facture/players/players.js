@@ -2,7 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const default_initialState = {
   track: null,
-  playlists: null,
+  isplaying: false,
+  refAudio: null, //referencia a la etiqueta audio para poder haceder desde cualquier..
+  currentMusic: {
+    playlists: null,
+    song: null,
+    songs: [],
+  },
 };
 
 const initialState = (() => {
@@ -21,9 +27,19 @@ const players = createSlice({
     setTrackPlayer: (state, action) => {
       state.track = action.payload;
     },
+    setIsPlaying: (state, action) => {
+      state.isplaying = action.payload;
+    },
+    setPlayList: (state, action) => {
+      state.currentMusic.playlists = action.payload;
+    },
+    setRefAudio: (state, action) => {
+      state.refAudio = action.payload;
+    },
   },
 });
 
 export default players.reducer;
 
-export const { setTrackPlayer } = players.actions;
+export const { setTrackPlayer, setIsPlaying, setPlayList, setRefAudio } =
+  players.actions;
