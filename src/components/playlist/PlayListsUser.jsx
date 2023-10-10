@@ -27,6 +27,8 @@ export const PlayListsUser = () => {
   const playListsUser = data?.data?.items
   
   //hacer el loader de las playlist 
+  
+  if (!playListsUser) return //si el usario no tiene playlist que no haga nada 
 
   return (
     <div className="px-4 mt-3 ">

@@ -28,7 +28,7 @@ export const Songs = () => {
   };
   const tracks = data?.data?.tracks?.items;
   const songId =  track?.id
-  const playing = (id) => id === songId && isplaying;
+  const playing = (id) => id === songId && isplaying; // validar si la playlist que se esta reproduciendo es igual a la que se esta recoriendo para poder colocar el <Playing/>
   return (
     <Table>
       <Thead>
@@ -82,11 +82,11 @@ export const Songs = () => {
                     >
                       {track?.name}
                     </Link>
-                    <div className="flex w-full max-w-[350px] text-ellipsis line-clamp-1 overflow-hidden justify-start items-center ">
+                    <div className="flex w-full max-w-[350px] text-ellipsis overflow-hidden justify-start items-center ">
                       {track?.artists?.map((artist , index) => (
                         <Link
                           to={`/${artist.type}/${artist.id}`}
-                          className="text-[13px] line-clamp-1 text-[#AAA8A9] hover:underline mr-[1px]"
+                          className="text-[13px] truncate text-[#AAA8A9] hover:underline mr-[1px]"
                           key={artist.id}
                         >
                           {artist.name} {index < track.artists.length - 1 && ", "}

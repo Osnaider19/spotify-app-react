@@ -9,11 +9,11 @@ export const GoodNight = ({ data }) => {
   function saludoSegunHora() {
     const horaActual = new Date().getHours();
     if (horaActual >= 5 && horaActual < 12) {
-      return "Buenos días";
+      return "Good morning";
     } else if (horaActual >= 12 && horaActual < 18) {
-      return "Buenas tardes";
+      return "Good afternoon";
     } else {
-      return "Buenas noches";
+      return "Good night";
     }
   }
 

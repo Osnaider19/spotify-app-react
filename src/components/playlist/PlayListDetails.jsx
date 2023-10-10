@@ -6,14 +6,10 @@ import { formatDuration, transformLikes } from "../../helpers/transform";
 import { LoaderPlayList } from "../loader/LoaderPlayList";
 import { useGetDetailsPlayList } from "../../hooks/useGetDetailsPlayList";
 import { useEffect } from "react";
-import { setIsPlaying, setPlayList, setTrackPlayer } from "../../redux/facture/players/players";
-import { useDispatch, useSelector } from "react-redux";
 
 export const PlayListDetails = () => {
   const { id } = useParams();
   const { data, isLoading, refetch } = useGetDetailsPlayList();
-  const { currentMusic, isplaying } = useSelector((state) => state.players);
-  const dispatch = useDispatch();
   useEffect(() => {
     refetch();
     scrollTo(0, 0);
@@ -37,21 +33,6 @@ export const PlayListDetails = () => {
       }
     }, 0),
   };
-
-  const handelPlay = (id) => {
-    //validamos que si la id de el estado y la id de la paylist actual son igual que 
-    //haga  una sete el isplaying y que pare la cancion si no significa que es 
-    //otra playlist
-    const tracks = data?.data?.tracks.items
-    if (id === currentMusic?.playlists?.id) {
-     dispatch(setIsPlaying(!isplaying))
-    } else {
-      dispatch(setPlayList({id: select.idPlayList,}));
-      dispatch(setTrackPlayer(tracks[0].track))
-      dispatch(setIsPlaying(true))
-    }
-  };
-
   return (
     <>
       <div className="relative min-w-full w-full h-full font-lato">
@@ -111,7 +92,10 @@ export const PlayListDetails = () => {
         <div className="relative w-full  h-[500px] mt-8 ">
           <div className="absolute left-0 top-0 h-[400px]  w-full bg-gradient-to-t from-transparent via-black/20 to-black/20"></div>
           <div className="relative z-10">
-            <NavPlay handelPlay={handelPlay} id={select.idPlayList} />
+            <NavPlay
+              id={select.idPlayList}
+              track={select.tracks[0].track}
+            />
             <Songs tracks={select.tracks} />
           </div>
         </div>

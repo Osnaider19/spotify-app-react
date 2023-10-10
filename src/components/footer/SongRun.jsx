@@ -7,7 +7,7 @@ export const SongRun = () => {
   const { track } = useSelector((state) => state.players);
   function runtost() {
     toast.error("info", {
-      description: `la track ${track?.name} no tiene preview`,
+      description: `la track ${track?.name} no tiene audio 😔`,
       style: {
         background: "#121212",
         color: "#1FDF64",
@@ -21,7 +21,7 @@ export const SongRun = () => {
     <>
       <div className="flex w-full  max-w-[450px]">
         <div className="flex px-2 py-1 gap-x-5 justify-center items-center">
-          <div className="min-h-[55px] min-w-[55px]  rounded-lg overflow-hidden">
+          <div className="min-h-[55px] min-w-[55px] max-h-[55px] max-w-[55px]  rounded-lg overflow-hidden">
             <img
               src={
                 track?.album?.images[2]?.url
