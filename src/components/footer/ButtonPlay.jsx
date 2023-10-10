@@ -8,10 +8,10 @@ export const ButtonPlay = ({ refAudio }) => {
   const dispatch = useDispatch();
   const toggleAudio = () => {
     const audio = refAudio.current;
-    if (audio.paused) {
+    if (!isplaying) {
       audio.play();
-      dispatch(setIsPlaying(true)); // state global
-      audio.autoplay = true;
+      dispatch(setIsPlaying(true));
+      audio.autoplay = true // state global
     } else {
       audio.pause();
       dispatch(setIsPlaying(false));

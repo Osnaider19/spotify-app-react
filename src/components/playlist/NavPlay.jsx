@@ -19,7 +19,7 @@ export const NavPlay = ({ handelPlay, id }) => {
         >
           <i className="w-full text-1xl h-full flex justify-center items-center text-black">
             {/* validar que si  */}
-            {isplaying && playlistsId === id && refAudio.autoplay ? (
+            {isplaying && playlistsId === id ? (
               <IconPause />
             ) : (
               <IconPlay />

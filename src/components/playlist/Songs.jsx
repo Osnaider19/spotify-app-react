@@ -23,16 +23,12 @@ export const Songs = () => {
     dispatch(setTrackPlayer(track));
     dispatch(setPlayList({id : playlist.id}))
     dispatch(setIsPlaying(true));
+    const audio = document.querySelector("#audio")
+    audio.autoplay = true
   };
   const tracks = data?.data?.tracks?.items;
   const songId =  track?.id
-  const playing = (id) => {
-    //validar si se este reproduciendo la cancion con el id y renderizar el playing
-    if (id === track?.id && isplaying === true) {
-      return true;
-    }
-    return false;
-  };
+  const playing = (id) => id === songId && isplaying;
   return (
     <Table>
       <Thead>
@@ -87,13 +83,13 @@ export const Songs = () => {
                       {track?.name}
                     </Link>
                     <div className="flex w-full max-w-[350px] text-ellipsis line-clamp-1 overflow-hidden justify-start items-center ">
-                      {track?.artists?.map((artist) => (
+                      {track?.artists?.map((artist , index) => (
                         <Link
                           to={`/${artist.type}/${artist.id}`}
-                          className="text-[13px] line-clamp-1 text-[#AAA8A9] hover:underline mr-1"
+                          className="text-[13px] line-clamp-1 text-[#AAA8A9] hover:underline mr-[1px]"
                           key={artist.id}
                         >
-                          {artist.name}
+                          {artist.name} {index < track.artists.length - 1 && ", "}
                         </Link>
                       ))}
                     </div>
