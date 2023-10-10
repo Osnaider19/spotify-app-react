@@ -6,7 +6,7 @@ import { formatDuration, transformLikes } from "../../helpers/transform";
 import { LoaderPlayList } from "../loader/LoaderPlayList";
 import { useGetDetailsPlayList } from "../../hooks/useGetDetailsPlayList";
 import { useEffect } from "react";
-import { setIsPlaying, setPlayList } from "../../redux/facture/players/players";
+import { setIsPlaying, setPlayList, setTrackPlayer } from "../../redux/facture/players/players";
 import { useDispatch, useSelector } from "react-redux";
 
 export const PlayListDetails = () => {
@@ -40,16 +40,15 @@ export const PlayListDetails = () => {
 
   const handelPlay = (id) => {
     //validamos que si la id de el estado y la id de la paylist actual son igual que 
-    //haga  una sete el isplaying y que pare la cancion si no significa que esta 
-    //actualizando la playlist
+    //haga  una sete el isplaying y que pare la cancion si no significa que es 
+    //otra playlist
+    const tracks = data?.data?.tracks.items
     if (id === currentMusic?.playlists?.id) {
      dispatch(setIsPlaying(!isplaying))
     } else {
-      dispatch(
-        setPlayList({
-          id: select.idPlayList,
-        })
-      );
+      dispatch(setPlayList({id: select.idPlayList,}));
+      dispatch(setTrackPlayer(tracks[0].track))
+      dispatch(setIsPlaying(true))
     }
   };
 
