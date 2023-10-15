@@ -5,7 +5,11 @@ import { Td } from "../table/Td";
 import { Th } from "../table/Th";
 import { Thead } from "../table/Thead";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsPlaying, setPlayList, setTrackPlayer } from "../../redux/facture/players/players";
+import {
+  setIsPlaying,
+  setPlayList,
+  setTrackPlayer,
+} from "../../redux/facture/players/players";
 import { Link } from "react-router-dom";
 import { transformDate, transformDuration } from "../../helpers/transform";
 import { TbPointFilled } from "react-icons/tb";
@@ -15,19 +19,41 @@ import { Playing } from "../playing/Playing";
 
 export const Songs = () => {
   const { data } = useGetDetailsPlayList();
-  const { track, isplaying } = useSelector((state) => state.players);
-  
+  const { track, isplaying, currentMusic } = useSelector(
+    (state) => state.players
+  );
+
   const dispatch = useDispatch();
   const playlist = data?.data;
   const handelplay = (track) => {
-    dispatch(setTrackPlayer(track));
-    dispatch(setPlayList({id : playlist.id}))
-    dispatch(setIsPlaying(true));
-    const audio = document.querySelector("#audio")
-    audio.autoplay = true
+    const tracks = currentMusic.tracks;
+    const playlistsState = currentMusic.playlists;
+    //validamos si las tracks de el estado son vacias entre o si la playlists es distinta a la playlist de el estado tambien entre por si es que quiere actualizar la playlists
+    if (!tracks || playlistsState.id !== playlist.id) {
+      //si entre actualizamos el estado con una nueva playlist y las lista de tracks
+      dispatch(
+        setPlayList({
+          playlists: {
+            id: playlist.id,
+            name : playlist.name
+          },
+          tracks: data?.data.tracks.items,
+        })
+      );
+      dispatch(setIsPlaying(true));
+      dispatch(setTrackPlayer(track));
+      const audio = document.querySelector("#audio");
+      audio.autoplay = true;
+    } else {
+      //aqui actuzalizamos solo la track que se esta reproduciendo con la que el usuario seleccionó
+      dispatch(setIsPlaying(true));
+      dispatch(setTrackPlayer(track));
+      const audio = document.querySelector("#audio");
+      audio.autoplay = true;
+    }
   };
   const tracks = data?.data?.tracks?.items;
-  const songId =  track?.id
+  const songId = track?.id;
   const playing = (id) => id === songId && isplaying; // validar si la playlist que se esta reproduciendo es igual a la que se esta recoriendo para poder colocar el <Playing/>
   return (
     <Table>
@@ -78,18 +104,21 @@ export const Songs = () => {
                   <div className="flex flex-col px-3">
                     <Link
                       to={`/track/${track?.id}`}
-                      className={`hover:underline line-clamp-1 ${track.id === songId && "text-green-500"}`}
+                      className={`hover:underline line-clamp-1 ${
+                        track.id === songId && "text-green-500"
+                      }`}
                     >
                       {track?.name}
                     </Link>
                     <div className="flex w-full max-w-[350px] text-ellipsis overflow-hidden justify-start items-center ">
-                      {track?.artists?.map((artist , index) => (
+                      {track?.artists?.map((artist, index) => (
                         <Link
                           to={`/${artist.type}/${artist.id}`}
                           className="text-[13px] truncate text-[#AAA8A9] hover:underline mr-[1px]"
                           key={artist.id}
                         >
-                          {artist.name} {index < track.artists.length - 1 && ", "}
+                          {artist.name}{" "}
+                          {index < track.artists.length - 1 && ", "}
                         </Link>
                       ))}
                     </div>

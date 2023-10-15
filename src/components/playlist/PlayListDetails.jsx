@@ -33,6 +33,7 @@ export const PlayListDetails = () => {
       }
     }, 0),
   };
+  console.log(data?.data)
   return (
     <>
       <div className="relative min-w-full w-full h-full font-lato">
@@ -93,8 +94,9 @@ export const PlayListDetails = () => {
           <div className="absolute left-0 top-0 h-[400px]  w-full bg-gradient-to-t from-transparent via-black/20 to-black/20"></div>
           <div className="relative z-10">
             <NavPlay
-              id={select.idPlayList}
-              track={select.tracks[0].track}
+              id={select?.idPlayList}
+              track={select?.tracks[0]?.track}
+              data={data?.data}
             />
             <Songs tracks={select.tracks} />
           </div>

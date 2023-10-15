@@ -1,10 +1,12 @@
 import { CiHeart } from "react-icons/ci";
 import { CgInpicture } from "react-icons/cg";
-import { useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+
 export const SongRun = () => {
   const { track } = useSelector((state) => state.players);
+
   function runtost() {
     toast.error("info", {
       description: `la track ${track?.name} no tiene audio 😔`,
@@ -17,6 +19,8 @@ export const SongRun = () => {
       },
     });
   }
+
+ 
   return (
     <>
       <div className="flex w-full  max-w-[450px]">

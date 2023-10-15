@@ -32,7 +32,7 @@ function App() {
             refresh_token: refresh_token,
           });
         }
-        if (!res.access_token) {
+        if (!res?.access_token) {
           throw new Error("error access token es null");
         }
         dispatch(setResponseToken(res));
@@ -52,7 +52,7 @@ function App() {
       const infUser = await res.json();
       dispatch(
         setInfoUser({
-          image: infUser?.images[0] ?? null,
+          image: infUser?.images[0] ? infUser?.images[0] : null,
           name: infUser?.display_name,
           id: infUser?.id,
         })

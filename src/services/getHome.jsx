@@ -1,7 +1,7 @@
 export const getHome = async (token) => {
   const [PlayListsResponse, AlbumsResponse] = await Promise.all([
     fetch(
-      `https://api.spotify.com/v1/browse/featured-playlists?country=CO&limit=10`,
+      `https://api.spotify.com/v1/browse/featured-playlists?limit=10`,
       {
         method: "GET",
         headers: {

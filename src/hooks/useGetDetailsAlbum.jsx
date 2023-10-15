@@ -14,6 +14,7 @@ export const useGetDetailsAlbum = () => {
     {
       refetchOnWindowFocus: false,
       refetchInterval: false,
+      retry : 6,
     }
   );
 

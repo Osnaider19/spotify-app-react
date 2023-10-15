@@ -22,7 +22,7 @@ export const SongsAlbum = () => {
   const { data } = useGetDetailsAlbum();
   const { track, isplaying } = useSelector((state) => state.players);
   const dispatch = useDispatch();
-  if (!data.data) return;
+  
 
   const songId = track?.id;
   const tracks = data?.data?.tracks?.items;
@@ -41,6 +41,7 @@ export const SongsAlbum = () => {
     const audio = document.querySelector("#audio");
     audio.autoplay = true;
   };
+  if (!data.data?.tracks?.items) return;
   return (
     <Table>
       <Thead>

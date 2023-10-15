@@ -1,30 +1,25 @@
-import { ButtonRunSong } from "./ButtonRunSong";
 import { useSelector } from "react-redux";
 import { ButtonPlay } from "./ButtonPlay";
 import "./player.css";
-import {
-  IconNext,
-  IconPreviuw,
-  IconRepeat,
-  IconShuffle,
-} from "../../Icons/Icons";
+import { IconRepeat, IconShuffle } from "../../Icons/Icons";
 import { SliderAudio } from "./SliderAudio";
+import { ButtonNext } from "./ButtonNext";
+import { ButtonPreviuw } from "./ButtonPreviuw";
 export const Player = ({ refAudio }) => {
-  const { track } = useSelector((state) => state.players);
   return (
     <div
-      className={`flex flex-col  flex-grow justify-center ${
-        track?.preview_url
-          ? "opacity-100 pointer-events-auto"
-          : "opacity-50 pointer-events-none"
-      }`}
+      className={`flex flex-col  flex-grow justify-center`}
     >
       <div className="flex justify-center items-center gap-x-7 py-1 ">
-        <ButtonRunSong icon={<IconShuffle />} />
-        <ButtonRunSong icon={<IconPreviuw />} />
+        <button className="text-[#ffffff80] cursor-pointer hover:scale-105 transition-all duration-200 hover:text-white">
+          <IconShuffle />
+        </button>
+        <ButtonPreviuw/>
         <ButtonPlay refAudio={refAudio} />
-        <ButtonRunSong icon={<IconNext />} />
-        <ButtonRunSong icon={<IconRepeat />} />
+        <ButtonNext />
+        <button className="text-[#ffffff80] cursor-pointer hover:scale-105 transition-all duration-200 hover:text-white">
+          <IconRepeat />
+        </button>
       </div>
       <SliderAudio refAudio={refAudio} />
     </div>
