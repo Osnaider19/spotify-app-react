@@ -20,26 +20,47 @@ import { Playing } from "../playing/Playing";
 
 export const SongsAlbum = () => {
   const { data } = useGetDetailsAlbum();
-  const { track, isplaying } = useSelector((state) => state.players);
+  const { track, isplaying , currentMusic } = useSelector((state) => state.players);
   const dispatch = useDispatch();
   
 
   const songId = track?.id;
   const tracks = data?.data?.tracks?.items;
   const playing = (id) => id === songId && isplaying;
-  const imagen = data?.data?.images[1].url;
-
-  const handelplay = (track) => {
-    const imagen = data?.data?.images[2]
+  
+  const imagen = data?.data?.images[2]
       ? data?.data?.images[2]
       : data?.data?.images[1];
-    const id = data?.data.id;
+  const handelplay = (track) => {
+    console.log(data.data)
     const trackImage = { ...track, album: { images: [imagen] } }; //mutamos el objeto para que pueda tener una imagen porque el objeto no tiene una imagen
-    dispatch(setTrackPlayer(trackImage));
-    dispatch(setPlayList({ id: id }));
-    dispatch(setIsPlaying(true));
-    const audio = document.querySelector("#audio");
-    audio.autoplay = true;
+    const tracks = currentMusic.tracks;//lista de tracks de el estado 
+    const playlists = data?.data // albums
+    const playlistsState = currentMusic.playlists;// playlist de el estado.
+    //validamos si las tracks de el estado son vacias entre o si la playlists es distinta a la playlist de el estado tambien entre por si es que quiere actualizar la playlists
+    if (!tracks || playlistsState.id !== playlists.id) {
+      //si entre actualizamos el estado con una nueva playlist y las lista de tracks
+      dispatch(
+        setPlayList({
+          playlists: {
+            id: playlists.id,
+            name : playlists.name,
+            images : playlists.images,
+          },
+          tracks: data?.data.tracks.items,
+        })
+      );
+      dispatch(setIsPlaying(true));
+      dispatch(setTrackPlayer(trackImage));
+      const audio = document.querySelector("#audio");
+      audio.autoplay = true;
+    } else {
+      //aqui actuzalizamos solo la track que se esta reproduciendo con la que el usuario seleccionó
+      dispatch(setIsPlaying(true));
+      dispatch(setTrackPlayer(trackImage));
+      const audio = document.querySelector("#audio");
+      audio.autoplay = true;
+    }
   };
   if (!data.data?.tracks?.items) return;
   return (
@@ -81,7 +102,7 @@ export const SongsAlbum = () => {
                 <div className="w-full flex py-1 items-center ">
                   <div className="max-w-[40px] max-h-[40px] w-full h-full bg-green-400">
                     <img
-                      src={imagen}
+                      src={imagen?.url}
                       className="w-full h-full object-cover "
                       alt={track?.name}
                     />

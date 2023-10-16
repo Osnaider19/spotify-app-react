@@ -9,14 +9,14 @@ import {
 } from "../../redux/facture/players/players";
 export const NavPlay = ({ id, track, data }) => {
   const { isplaying, currentMusic } = useSelector((state) => state.players);
-  const playlistsId = currentMusic?.playlists?.id;
+  const playlists = currentMusic?.playlists;
   const dispatch = useDispatch();
 
   const handelPlayList = (id) => {
     //validamos que si la id de el estado y la id de la paylist actual son igual que
     //haga  una sete el isplaying y que pare la cancion si no significa que es
     //otra playlist
-    if (id === playlistsId) {
+    if (playlists && id === playlists?.id) {
       dispatch(setIsPlaying(!isplaying));
       const audio = document.querySelector("#audio");
       if (!isplaying) audio?.play();
@@ -26,6 +26,8 @@ export const NavPlay = ({ id, track, data }) => {
         setPlayList({
           playlists: {
             id: data.id,
+            images : data.images,
+            name : data.name,
           },
           tracks: data.tracks.items,
         })
@@ -46,7 +48,7 @@ export const NavPlay = ({ id, track, data }) => {
         >
           <i className="w-full text-1xl h-full flex justify-center items-center text-black">
             {/* validar que si  la playlist es igual ala que se esta reproduciendo */}
-            {isplaying && playlistsId === id ? <IconPause /> : <IconPlay />}
+            {isplaying && playlists.id === id ? <IconPause /> : <IconPlay />}
           </i>
         </button>
         <button className="flex justify-center items-center h-full ">

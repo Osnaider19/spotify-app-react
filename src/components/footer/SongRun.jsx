@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 export const SongRun = () => {
-  const { track } = useSelector((state) => state.players);
+  const { track , currentMusic } = useSelector((state) => state.players);
 
   function runtost() {
     toast.error("info", {
@@ -20,19 +20,17 @@ export const SongRun = () => {
     });
   }
 
- 
+  const imagen = track?.album?.images[2]?.url 
+  ? track?.album?.images[2]?.url //si entra aca es una playlists
+  : currentMusic?.playlists?.images[2]?.url //si entra aca es un album
   return (
     <>
-      <div className="flex w-full  max-w-[450px]">
-        <div className="flex px-2 py-1 gap-x-5 justify-center items-center">
-          <div className="min-h-[55px] min-w-[55px] max-h-[55px] max-w-[55px]  rounded-lg overflow-hidden">
+      <div className="flex max-w-[450px] overflow-hidden  w-full">
+        <div className="flex px-2 py-1  justify-center items-center max-w-[450px] ">
+          <div className="min-h-[55px] min-w-[55px] max-h-[55px] max-w-[55px]  rounded-lg overflow-hidden mr-2">
             <img
-              src={
-                track?.album?.images[2]?.url
-                  ? track?.album?.images[2]?.url
-                  : track?.album?.images[0]?.url
-              }
-              alt=""
+              src={imagen}
+              alt={track?.name}
               className="w-full h-full object-cover"
             />
           </div>
@@ -43,21 +41,21 @@ export const SongRun = () => {
             >
               {track?.name}
             </Link>
-            <div className="text-[12px] flex  justify-start items-center overflow-hidden line-clamp-1   w-full text-ellipsis">
+            <div className="text-[12px] flex  justify-start items-center overflow-hidden text-[#AAA8A9]">
               {track?.artists?.map((artist, index) => (
                 <Link
                   key={artist.id}
                   to={`artist/${artist.id}`}
-                  className="hover:underline mr-1 text-ellipsis"
+                  className="hover:underline"
                 >
-                  <span className=" truncate">
+                  <span className="truncate line-clamp-1">
                     {artist.name} {index < track.artists.length - 1 && ", "}
                   </span>
                 </Link>
               ))}
             </div>
           </div>
-          <div className="flex gap-x-2 py-1 ml-2">
+          <div className="flex gap-x-2 py-1 ml-3 ">
             <i className="text-2xl text-[#ffffff80] cursor-pointer hover:scale-105 transition-all duration-200 hover:text-white">
               <CiHeart />
             </i>
@@ -67,7 +65,7 @@ export const SongRun = () => {
           </div>
         </div>
       </div>
-      {track?.preview_url === null && runtost()}
+      {track?.preview_url === null && runtost()} {/* si no tiene audio la track mandamos la notificacion */}
     </>
   );
 };

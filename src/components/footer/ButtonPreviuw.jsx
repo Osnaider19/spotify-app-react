@@ -12,12 +12,23 @@ export const ButtonPreviuw = () => {
     const searchTrack = track?.id;
     //traemos todas las tracks que esta en el estado
     const tracks = currentMusic?.tracks;
+    let index = 0;
     //buscamos el indece de la track por el id de la track en toda la lista de tracks
-    const index = tracks?.findIndex(({ track }) => track.id === searchTrack);
+    if (tracks[0].track) {
+      //si entra aca es porque es una playlist
+      index = tracks?.findIndex(({ track }) => track.id === searchTrack);
+    } else {
+      //si entra aca es porque es un album
+      index = tracks?.findIndex((track) => track.id === searchTrack);
+    }
     //si el index en mayor a 0 significa que puede ir hacia atras
     if (index > 0) {
       //aqui actualizamos el estado de la track que se esta reproduciendo con el index - 1 porque el index es el indice de la track que se esta reproduciendo
-      dispatch(setTrackPlayer(currentMusic.tracks[index - 1].track));
+      const playlistsOrAlbums = 
+      currentMusic.tracks[index].track  
+      ? currentMusic.tracks[index - 1].track // si es una playlists
+      : currentMusic.tracks[index - 1] // si no es una album
+      dispatch(setTrackPlayer(playlistsOrAlbums));
       //actualizamos el isplaying
       dispatch(setIsPlaying(true));
       //el elemento de el dom audio por su id
