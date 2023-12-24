@@ -8,13 +8,13 @@ export const useGetDetailsAlbum = () => {
   const { id } = useParams();
   const token = responseToken?.access_token;
   const url = `https://api.spotify.com/v1/albums/${id}`;
-  const { data, isLoading, isError , refetch } = useQuery(
-    ["detailsAlbum"],
+  const { data, isLoading, isError, refetch } = useQuery(
+    ["detailsAlbum", `${id}`],
     () => getDetailsAlbum(url, token),
     {
       refetchOnWindowFocus: false,
       refetchInterval: false,
-      retry : 6,
+      retry: 6,
     }
   );
 
@@ -22,6 +22,6 @@ export const useGetDetailsAlbum = () => {
     data,
     isError,
     isLoading,
-    refetch
+    refetch,
   };
 };

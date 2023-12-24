@@ -33,7 +33,7 @@ export const PlayListDetails = () => {
       }
     }, 0),
   };
-  console.log(data?.data)
+  
   return (
     <>
       <div className="relative min-w-full w-full h-full font-lato">

@@ -9,7 +9,7 @@ export const useGetDetailsPlayList = () => {
   const token = responseToken?.access_token;
   const url = `https://api.spotify.com/v1/playlists/${id}`;
   const { data, isLoading, isError , refetch } = useQuery(
-    ["detailsPlayList"],
+    ["detailsPlayList" , `${id}`],
     () => getDetailsPlayList(url, token),
     {
       refetchOnWindowFocus: false,

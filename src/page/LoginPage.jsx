@@ -2,8 +2,12 @@ import { SpotfifyAuth } from "../helpers/auth";
 import { useEffect, useCallback } from "react";
 import { CLIENT_ID, REDIRECT_URI } from "../config/config";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate , useLocation } from "react-router-dom";
-import { setIsAuthenticated , setRefreshToken , setResponseToken } from "../redux/facture/auth/authSlice";
+import { useNavigate, useLocation } from "react-router-dom";
+import {
+  setIsAuthenticated,
+  setRefreshToken,
+  setResponseToken,
+} from "../redux/facture/auth/authSlice";
 
 export function LoginPage() {
   const { refresh_token } = useSelector((state) => state.authUser);
